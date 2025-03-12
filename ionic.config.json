@@ -1,0 +1,7 @@
+{
+  "name": "TurmaLina-Classroom",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
