@@ -1,17 +1,33 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="dark" id="open-modal" expand="block">
+        <ion-icon name="settings" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <app-perfil></app-perfil>
 </ion-content>
+
+
+    <ion-modal #modal trigger="open-modal" [presentingElement]="presentingElement">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Configurações</ion-title>
+            <ion-buttons slot="end">
+              <ion-button color="dark" (click)="modal.dismiss()">
+                <ion-icon name="close" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <app-settings></app-settings>
+        </ion-content>
+      </ng-template>
+    </ion-modal>

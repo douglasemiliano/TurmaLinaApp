@@ -1,2 +1,113 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+/* Ionic Variables and Theming
+ * ---------------------------------------------------------------
+ * Any overrides to theme variables should be placed in this file.
+ * For more information, please see:
+ * http://ionicframework.com/docs/theming/
+ */
+
+ @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+/* This sets a different item border color for the default theme on ios and md */
+:root {
+  --ion-item-border-color: var(--ion-background-color-step-200);
+  --font-family: montserrat, sans-serif;
+  --font-family-heading: 'Poppins', sans-serif; /* Fonte específica para os títulos */
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+}
+
+/* This sets a different background and item background for the default theme on ios */
+
+/* This sets a different background and item background for the default theme on md */
+:root.md, :root.ios {
+  --ion-background-color: var(--ion-background-color-step-100, #f9f9f9);
+  --ion-toolbar-background: var(--ion-background-color);
+  --ion-item-background: var(--background-color-dark);
+  --ion-color-primary: var(--text-primary);  
+  --primary-color: #004475;  
+  --primary-color-dark: #012c4b;  
+  --secondary-color: #006699;  
+  --secondary-color-dark: #004475;
+  --background-color: #dcdcfe; 
+  --background-color-inverse: #0e0e46;
+  --background-color-dark: #b9b9e4; 
+  --text-primary: #161e55;
+  --text-secondary: white;
+  --accent-color: #cc6600;
+  --accent-color-dark: #994d00;
+  --accent-color-darker: #592d00;
+  --gradient-primary: linear-gradient(135deg, #004577, #006699);
+  --gradient-secondary: linear-gradient(135deg, #ff9933, #ffc266);
+  --text: #282929;
+  --ion-modal-background: var(--background-color);
+  
+
+
+}
+
+/* This sets a different item background when dark mode is enabled on ios and md */
+.ion-palette-dark.ios,
+.ion-palette-dark.md {
+  --ion-item-background: #0e0e46;
+  --ion-background-color: #010123;
+  --ion-color-primary: #cc6600;
+  --ion-color-primary-contrast-rgb: black;
+  --ion-color-primary-contrast: #010123;
+  --primary-color: #8aceff;  
+  --primary-color-dark: #5a9bca;  
+  --secondary-color: #66ccff;  
+  --secondary-color-dark: #3bb8f7;
+  --background-color: #010123; 
+  --background-color-inverse: #b9b9e4; 
+  --background-color-dark: #0e0e46;
+  --text: white;
+  --text-primary: white;
+  --text-secondary: #161e55;
+  --accent-color: #ff9933;
+  --accent-color-dark: #ca6601;
+  --accent-color-darker: #804d00;
+  --gradient-primary: linear-gradient(135deg, #ff9933, #ffc266);
+  --gradient-secondary: linear-gradient(135deg, #004577, #006699);
+  --ion-modal-background: #010123;
+  --ion-content-background: #010123;
+
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold); /* Peso de fonte negrito para os títulos */
+  margin: 0;
+  color: var(--text-primary);
+}
+
+h2 {
+  font-size: 2rem; /* Tamanho para h2 */
+  line-height: 1.3;
+}
+
+p{
+  color: white;
+}
+
+ion-app{
+  --background: var(--background-color);
+}
+
+ion-content{
+  --background: var(--background-color);
+}
+
+ion-toolbar{
+  --background: var(--background-color);
+  & ion-icon{
+    color: var(--text-primary);
+  }
+}
+
+ion-tab-bar{
+  --background: var(--background-color);
+}

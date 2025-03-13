@@ -1,31 +1,18 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button default-href="#"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Display</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="dark">
-        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-  <ion-list-header>Appearance</ion-list-header>
+  <ion-list-header>Modo de Cor</ion-list-header>
   <ion-list [inset]="true">
     <ion-item>
-      <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
-        >Dark Mode</ion-toggle
-      >
+      <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between">
+        Modo de Cor</ion-toggle>
     </ion-item>
   </ion-list>
 
   <ion-list [inset]="true">
     <ion-item [button]="true">Text Size</ion-item>
     <ion-item>
-      <ion-toggle justify="space-between">Bold Text</ion-toggle>
+      <ion-toggle  justify="space-between">Bold Text</ion-toggle>
     </ion-item>
   </ion-list>
 

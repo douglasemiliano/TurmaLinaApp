@@ -17,14 +17,14 @@ import {
   IonToggle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-
 import { addIcons } from 'ionicons';
 import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
 
+
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss'],
   imports: [
     FormsModule,
     IonBackButton,
@@ -44,7 +44,7 @@ import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons
     IonToolbar,
   ],
 })
-export class Tab1Page implements OnInit {
+export class SettingsComponent implements OnInit {
   paletteToggle = false;
 
   constructor() {
