@@ -1,0 +1,5 @@
+<div class="button-container">
+  <div class="pixel-button" (click)="clickEmitter()" [class]="type" [class.click]="isClicked" [class.disabled]="isDisabled == 'true'">
+    <ion-icon [name]="isDisabled == 'true' ? 'info-circle-outline' : iconName"></ion-icon>  
+  </div>
+</div>

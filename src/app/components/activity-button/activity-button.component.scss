@@ -1,0 +1,86 @@
+
+.primary {
+    background-color: var(--primary-color); /* Cor do botão */
+    box-shadow: 4px 4px 0 var(--primary-color-dark);
+    border: 4px solid var(--primary-color-dark);
+    color: var(--text-secondary);
+}
+
+.secondary {
+    background-color: var(--secondary-color);
+    box-shadow: 4px 4px 0 var(--secondary-color-dark);
+    border: 4px solid var(--secondary-color-dark);
+    color: var(--text-secondary);
+}   
+
+.aux {
+    background-color: transparent;
+    box-shadow: 4px 4px 0 var(--primary-color);
+    border: 4px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.accent {
+    background-color: var(--accent-color);
+    box-shadow: 4px 4px 0 var(--accent-color-dark);
+    border: 4px solid var(--accent-color-dark);
+    color: var(--accent-color-darker);
+    
+}
+
+.gray {
+    background-color:gray;
+    border: 4px solid rgb(68, 68, 68);
+    box-shadow: 4px 4px 0 rgb(68, 68, 68);
+    color: var(--accent-color-darker);
+    color: rgb(68, 68, 68);
+
+}
+
+.button-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pixel-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Faz o botão ser redondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px !important;
+    image-rendering: pixelated; /* Para o ícone ser "pixelado" */
+    position: relative;
+    font-family: 'Press Start 2P',sans-serif; /* Fonte 8-bit */
+}
+
+.click {
+    animation: click 0.1s;
+  }
+  
+.not-click {
+    transform: translate(0px, 0px);
+    transition: transform 0.1s; /* Movimento suave */
+}
+
+@keyframes click {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    100% {
+        transform: translate(6px, 6px);
+    }
+}
+
+.disabled {
+    background-color: gray;
+    border: 4px solid rgb(68, 68, 68);
+    box-shadow: 4px 4px 0 rgb(68, 68, 68);
+    color: rgb(68, 68, 68);
+}

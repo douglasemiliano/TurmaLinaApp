@@ -1,0 +1,18 @@
+ion-segment-content {
+    & h3 {
+        text-align: center;
+        margin-top: 20px;
+    }
+}
+
+ion-segment {
+    background-color: var(--background-color);
+  
+    & ion-segment-button {
+      background-color: var(--background-color);
+      color: var(--text-primary);
+      --ion-color-step-350: var(--segment-button-color);
+  
+    }
+  }
+  

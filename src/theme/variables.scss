@@ -23,7 +23,7 @@
 
 /* This sets a different background and item background for the default theme on md */
 :root.md, :root.ios {
-  --ion-background-color: var(--ion-background-color-step-100, #f9f9f9);
+  --ion-background-color: var(--background-color);
   --ion-toolbar-background: var(--ion-background-color);
   --ion-item-background: var(--background-color-dark);
   --ion-color-primary: var(--text-primary);  
@@ -43,7 +43,8 @@
   --gradient-secondary: linear-gradient(135deg, #ff9933, #ffc266);
   --text: #282929;
   --ion-modal-background: var(--background-color);
-  
+  --segment-button-color: var(--background-color-dark);
+  --segment-button-text: var(--text);
 
 
 }
@@ -72,8 +73,9 @@
   --gradient-primary: linear-gradient(135deg, #ff9933, #ffc266);
   --gradient-secondary: linear-gradient(135deg, #004577, #006699);
   --ion-modal-background: #010123;
-  --ion-content-background: #010123;
-
+  --segment-button-color: var(--accent-color);
+  --segment-button-text: var(--text);
+  --indicator-color: var(--accent-color);
 
 }
 

@@ -1,0 +1,23 @@
+
+
+
+
+<h3>Meus Cursos</h3>
+
+<div class="cursos-container">
+    @for (curso of cursos; track curso.id) {
+        <div class="card" (click)="entrarNoCurso(curso)">
+            <div class="image">
+                <img src="https://i9acao.com.br/wp-content/uploads/2022/03/4-SAIB1.png" alt="">
+            </div>
+        <div class="content">
+            <h4>{{curso.nome}}</h4>
+            <h5>Seção: {{curso.section}}</h5>
+            <!-- <p>{{curso.descricao}}</p> -->
+    
+        </div>
+    </div>
+    }
+</div>
+    
+    

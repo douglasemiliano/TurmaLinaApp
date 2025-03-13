@@ -1,0 +1,82 @@
+.trilha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  /* Cada item terá um layout próprio, criando o efeito de zigue-zague */
+  .trilha div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+  }
+  
+  /* Posicionamento do zigue-zague */
+  .item-left {
+    align-self: flex-start;
+  }
+  
+  .item-middle {
+    align-self: center;
+  }
+  
+  .item-right {
+    align-self: flex-end;
+  }
+  
+  /* Botão redondo com efeito 3D */
+  button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #3e8e41;
+    border: none;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Efeito ao clicar */
+  button:active {
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+  }
+  
+  /* Nome da atividade */
+  .atividade-nome {
+    margin-top: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+    color: var(--text);
+  }
+
+  .accent {
+    color: var(--accent-color);
+  }
+
+  .primary {
+    color: var(--text-primary);
+  }
+
+  .secondary {
+    color: var(--text-secondary);
+  }
+
+  .clicked {
+    transform: translatey(2px); /* Move o ícone para a direita */
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
+
+  }

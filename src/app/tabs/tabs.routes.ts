@@ -11,6 +11,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('../tab1/tab1.page').then((m) => m.Tab1Page),
       },
+      {path: 'cursos/:id', loadComponent: () => import('../pages/atividade/listar-atividade/listar-atividade.component').then(m => m.ListarAtividadeComponent)},
       {
         path: 'tab2',
         loadComponent: () =>

@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#" text="Voltar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Display</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-segment>
+  <ion-segment-button value="first" content-id="first">
+    <ion-icon name="map"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="second" content-id="second">
+    <ion-icon name="people"></ion-icon>
+  </ion-segment-button>
+</ion-segment>
+<ion-segment-view>
+  <ion-segment-content id="first">
+      <h3>Mapa dos desafios</h3>
+      <br>
+      <app-trilha [atividades]="atividades"></app-trilha>
+  </ion-segment-content>
+  <ion-segment-content id="second">Second</ion-segment-content>
+</ion-segment-view>
+
+
