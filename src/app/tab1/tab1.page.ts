@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonSegment, IonSegmentButton, IonLabel, IonButton, IonIcon, IonButtons, IonSegmentContent, IonSegmentView } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { barbell, basket, call, globe, heart, home, map, people, person, pin, star, trash } from 'ionicons/icons';
 import { ListarCursoComponent } from "../pages/curso/listar-curso/listar-curso.component";
@@ -12,14 +12,6 @@ import { ListarCursoComponent } from "../pages/curso/listar-curso/listar-curso.c
     IonToolbar, 
     IonTitle, 
     IonContent, 
-    IonSegment, 
-    IonSegmentButton, 
-    IonLabel, 
-    IonButton, 
-    IonIcon, 
-    IonButtons, 
-    IonSegmentContent, 
-    IonSegmentView, 
     ListarCursoComponent,
     ListarCursoComponent],
 })

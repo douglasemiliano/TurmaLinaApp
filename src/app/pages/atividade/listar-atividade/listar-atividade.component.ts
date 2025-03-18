@@ -1,26 +1,18 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   IonBackButton,
-  IonButton,
   IonButtons,
-  IonContent,
   IonHeader,
   IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
-  IonRange,
-  IonText,
   IonTitle,
-  IonToggle,
   IonToolbar,
   IonSegment,
   IonSegmentButton,
   IonSegmentContent,
-  IonSegmentView
+  IonSegmentView,
+  IonFooter,
+  IonLabel
 } from '@ionic/angular/standalone';
-import { ActivityButtonComponent } from "../../../components/activity-button/activity-button.component";
 import { CursoService } from 'src/app/services/curso.service';
 import { TrilhaComponent } from '../trilha/trilha.component';
 
@@ -29,26 +21,18 @@ import { TrilhaComponent } from '../trilha/trilha.component';
   templateUrl: './listar-atividade.component.html',
   styleUrls: ['./listar-atividade.component.scss'],
   imports: [IonBackButton,
-    IonButton,
     IonButtons,
-    IonContent,
     IonHeader,
     IonIcon,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonListHeader,
-    IonRange,
-    IonText,
     IonTitle,
-    IonToggle,
     IonToolbar,
     IonSegment,
-    ActivityButtonComponent,
     IonSegmentButton,
     IonSegmentContent,
     IonSegmentView,
-    TrilhaComponent]
+    TrilhaComponent,
+    IonFooter,
+  IonLabel]
 })
 export class ListarAtividadeComponent {
 

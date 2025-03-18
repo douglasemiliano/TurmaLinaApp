@@ -1,13 +1,13 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
-import { IonContent, IonAvatar, IonItem, IonLabel } from '@ionic/angular/standalone';
+import { Component, signal, WritableSignal } from '@angular/core';
+import { IonAvatar } from '@ionic/angular/standalone';
 import { ProgressBarComponent } from '../../components/progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss'],
-  imports: [IonContent, NgOptimizedImage, CommonModule, IonAvatar, IonItem, IonLabel, ProgressBarComponent]
+  imports: [ NgOptimizedImage, CommonModule, IonAvatar, ProgressBarComponent]
 })
 export class PerfilComponent {
   isOpen = false;

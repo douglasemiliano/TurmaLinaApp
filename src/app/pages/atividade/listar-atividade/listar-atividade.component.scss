@@ -14,5 +14,13 @@ ion-segment {
       --ion-color-step-350: var(--segment-button-color);
   
     }
+
+    & ion-segment-view {
+      background-color: red !important;
+    }
   }
   
+#first {
+  background-color: var(--background-color);
+  height: 100%;
+}

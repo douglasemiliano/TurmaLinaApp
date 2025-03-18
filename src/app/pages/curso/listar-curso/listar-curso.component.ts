@@ -1,39 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CursoService } from '../../../services/curso.service';
-import {
-  IonHeader, 
-    IonToolbar, 
-    IonTitle, 
-    IonContent, 
-    IonSegment, 
-    IonSegmentButton, 
-    IonLabel, 
-    IonButton, 
-    IonIcon, 
-    IonButtons, 
-    IonSegmentContent, 
-    IonSegmentView, 
-} from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-listar-curso',
-  imports: [RouterModule,
-    IonHeader, 
-    IonToolbar, 
-    IonTitle, 
-    IonContent, 
-    IonSegment, 
-    IonSegmentButton, 
-    IonLabel, 
-    IonButton, 
-    IonIcon, 
-    IonButtons, 
-    IonSegmentContent, 
-    IonSegmentView, 
-    ListarCursoComponent,
-    ListarCursoComponent
-  ],
+  imports: [RouterModule],
   templateUrl: './listar-curso.component.html',
   styleUrl: './listar-curso.component.scss'
 })

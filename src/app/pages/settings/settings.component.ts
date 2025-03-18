@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  IonBackButton,
-  IonButton,
-  IonButtons,
   IonContent,
-  IonHeader,
   IonIcon,
   IonItem,
   IonLabel,
@@ -13,9 +9,7 @@ import {
   IonListHeader,
   IonRange,
   IonText,
-  IonTitle,
   IonToggle,
-  IonToolbar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
@@ -27,11 +21,7 @@ import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons
   styleUrls: ['./settings.component.scss'],
   imports: [
     FormsModule,
-    IonBackButton,
-    IonButton,
-    IonButtons,
     IonContent,
-    IonHeader,
     IonIcon,
     IonItem,
     IonLabel,
@@ -39,9 +29,7 @@ import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons
     IonListHeader,
     IonRange,
     IonText,
-    IonTitle,
     IonToggle,
-    IonToolbar,
   ],
 })
 export class SettingsComponent implements OnInit {
