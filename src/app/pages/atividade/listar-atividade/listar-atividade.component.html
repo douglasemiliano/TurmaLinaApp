@@ -15,6 +15,9 @@
   <ion-segment-button value="second" content-id="second">
     <ion-icon name="people"></ion-icon>
   </ion-segment-button>
+  <ion-segment-button value="third" content-id="third">
+    <ion-icon name="medal"></ion-icon>
+  </ion-segment-button>
 </ion-segment>
 <ion-segment-view>
   <ion-segment-content id="first">
@@ -23,6 +26,128 @@
       <app-trilha [atividades]="atividades"></app-trilha>
   </ion-segment-content>
   <ion-segment-content id="second">Second</ion-segment-content>
+  <ion-segment-content id="third">
+    <ion-content>
+      <!-- Top 3 Players Section -->
+      <div class="top-players">
+        <!-- Second Place -->
+        <div class="player second-place">
+          <div class="medal">2</div>
+          <ion-avatar>
+            <img src="assets/dog.png">
+          </ion-avatar>
+          <ion-label>
+            <h2>Carlos</h2>
+            <h3>8,750 pts</h3>
+          </ion-label>
+        </div>
+        
+        <!-- First Place -->
+        <div class="player first-place">
+          <div class="medal">1</div>
+          <ion-avatar>
+            <img src="assets/zebra.png">
+          </ion-avatar>
+          <ion-label>
+            <h2>Ana</h2>
+            <h3>9,320 pts</h3>
+          </ion-label>
+        </div>
+        
+        <!-- Third Place -->
+        <div class="player third-place">
+          <div class="medal">3</div>
+          <ion-avatar>
+            <img src="assets/wolf.png">
+          </ion-avatar>
+          <ion-label>
+            <h2>Roberto</h2>
+            <h3>7,890 pts</h3>
+          </ion-label>
+        </div>
+      </div>
+    
+      <!-- Rest of the ranking list -->
+      <ion-list>
+        <ion-item class="current-user">
+          <ion-avatar slot="start">
+            <div class="rank-number">8</div>
+          </ion-avatar>
+          <ion-label>
+            <h2>Você</h2>
+            <p>5,430 pts</p>
+          </ion-label>
+          <ion-badge color="success" slot="end">+2 ↑</ion-badge>
+        </ion-item>
+    
+        <ion-item lines="full">
+          <ion-avatar slot="start">
+            <div class="rank-number">4</div>
+          </ion-avatar>
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/user4?d=mp">
+          </ion-avatar>
+          <ion-label>
+            <h2>Fernanda</h2>
+            <p>7,120 pts</p>
+          </ion-label>
+          <ion-badge color="danger" slot="end">-1 ↓</ion-badge>
+        </ion-item>
+    
+        <ion-item lines="full">
+          <ion-avatar slot="start">
+            <div class="rank-number">5</div>
+          </ion-avatar>
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/user5?d=mp">
+          </ion-avatar>
+          <ion-label>
+            <h2>Lucas</h2>
+            <p>6,890 pts</p>
+          </ion-label>
+          <ion-badge color="success" slot="end">+3 ↑</ion-badge>
+        </ion-item>
+    
+        <ion-item lines="full">
+          <ion-avatar slot="start">
+            <div class="rank-number">6</div>
+          </ion-avatar>
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/user6?d=mp">
+          </ion-avatar>
+          <ion-label>
+            <h2>Juliana</h2>
+            <p>6,450 pts</p>
+          </ion-label>
+          <ion-badge slot="end">0 =</ion-badge>
+        </ion-item>
+    
+        <ion-item lines="full">
+          <ion-avatar slot="start">
+            <div class="rank-number">7</div>
+          </ion-avatar>
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/user7?d=mp">
+          </ion-avatar>
+          <ion-label>
+            <h2>Marcelo</h2>
+            <p>5,980 pts</p>
+          </ion-label>
+          <ion-badge color="danger" slot="end">-2 ↓</ion-badge>
+        </ion-item>
+      </ion-list>
+    
+      <!-- Level Progress -->
+      <!-- <div class="level-progress">
+        <h4>Nível 15</h4>
+        <ion-progress-bar value="0.7"></ion-progress-bar>
+        <div class="progress-info">
+          <span>5,430 pts</span>
+          <span>7,000 pts (próximo nível)</span>
+        </div>
+      </div> -->
+    </ion-content>
+  </ion-segment-content>
 </ion-segment-view>
 
 

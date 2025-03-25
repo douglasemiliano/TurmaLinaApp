@@ -10,8 +10,12 @@ import {
   IonSegmentButton,
   IonSegmentContent,
   IonSegmentView,
-  IonFooter,
-  IonLabel
+  IonLabel,
+  IonAvatar,
+  IonContent,
+  IonItem,
+  IonList,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import { CursoService } from 'src/app/services/curso.service';
 import { TrilhaComponent } from '../trilha/trilha.component';
@@ -31,7 +35,11 @@ import { TrilhaComponent } from '../trilha/trilha.component';
     IonSegmentContent,
     IonSegmentView,
     TrilhaComponent,
-    IonFooter,
+    IonAvatar,
+    IonContent,
+    IonItem,
+    IonList,
+    IonBadge,
   IonLabel]
 })
 export class ListarAtividadeComponent {

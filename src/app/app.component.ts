@@ -9,8 +9,10 @@ import { TabsPage } from './tabs/tabs.page';
 })
 export class AppComponent implements OnInit {
   paletteToggle = false;
-
-  constructor() {}
+  rotaAtual: string = "";
+  constructor() {
+    this.rotaAtual = location.pathname;
+  }
 
   ngOnInit() {
     // Recuperar o valor do modo de tema do localStorage
