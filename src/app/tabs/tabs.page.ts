@@ -19,9 +19,7 @@ export class TabsPage {
     addIcons({ triangle, ellipse, square, images, personCircle, map });
   }
 
-  goTo(rota: string){
-    console.log(rota);
-    
+  goTo(rota: string){    
     this.router.navigateByUrl(rota);
   }
 }

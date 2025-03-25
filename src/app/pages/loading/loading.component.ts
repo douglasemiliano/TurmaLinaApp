@@ -2,6 +2,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSpinner } from '@ionic/angular/standalone';
+import { CoreService } from 'src/app/services/core.service';
 @Component({
   selector: 'app-loading',
   templateUrl: './loading.component.html',

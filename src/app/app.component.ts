@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Signal, WritableSignal } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { TabsPage } from './tabs/tabs.page';
+import { ActivatedRoute } from '@angular/router';
+import { CoreService } from './services/core.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +11,21 @@ import { TabsPage } from './tabs/tabs.page';
 })
 export class AppComponent implements OnInit {
   paletteToggle = false;
-  rotaAtual: string = "";
-  constructor() {
-    this.rotaAtual = location.pathname;
+
+  private coreService = inject(CoreService);
+
+  rotaAtual: Signal<string> = this.coreService.rotaAtual;
+
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+
+    console.log(location.pathname);
+    console.log(this.rotaAtual());
+    
+    
+    this.coreService.atualizarRotaAtual(location.pathname);
     // Recuperar o valor do modo de tema do localStorage
     const storedTheme = localStorage.getItem('theme');
 

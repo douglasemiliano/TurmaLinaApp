@@ -1,6 +1,6 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
-  @if(rotaAtual !== '/') {
+  @if(rotaAtual() !== '/') {
     <app-tabs></app-tabs>
   }
 </ion-app>
