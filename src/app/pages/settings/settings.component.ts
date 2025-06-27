@@ -10,7 +10,7 @@ import {
 import { addIcons } from 'ionicons';
 import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
 import { AuthGoogleService } from 'src/app/services/auth/auth-google.service';
-
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -23,13 +23,15 @@ import { AuthGoogleService } from 'src/app/services/auth/auth-google.service';
     IonItem,
     IonList,
     IonListHeader,
-    IonToggle,
+    IonToggle
   ],
+  providers:[ModalController]
 })
 export class SettingsComponent implements OnInit {
   paletteToggle = false;
 
   authService = inject(AuthGoogleService);
+  modalController = inject(ModalController);
 
   constructor() {
     addIcons({ personCircle, personCircleOutline, sunny, sunnyOutline });
@@ -37,6 +39,7 @@ export class SettingsComponent implements OnInit {
 
   logout(){
     this.authService.logout();
+    this.modalController.dismiss();
   }
 
   ngOnInit() {
