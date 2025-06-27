@@ -8,6 +8,7 @@ export const routes: Routes = [
   {path: 'login', loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)},
   {path: 'cursos', loadComponent: () => import("./pages/curso/listar-curso/listar-curso.component").then(m => m.ListarCursoComponent)},
   {path: 'cursos/:id', loadComponent: () => import('./pages/atividade/listar-atividade/listar-atividade.component').then(m => m.ListarAtividadeComponent)},
+  {path: 'atividade', loadComponent: () => import('./pages/atividade/detalhar-atividade/detalhar-atividade.component').then(m => m.DetalharAtividadeComponent)},
   {path: 'perfil', loadComponent: () => import('./pages/perfil/perfil.component').then(m => m.PerfilComponent)},
   {
     path: 'tab2',

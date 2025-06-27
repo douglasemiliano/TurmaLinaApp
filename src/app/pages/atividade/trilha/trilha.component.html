@@ -1,6 +1,6 @@
 <div class="trilha">
   <div *ngFor="let atividade of atividades; let i = index" [class]="getPositionClass(i)">
-    <app-activity-button [type]="atividade.state == 'CREATED' ? 'gray' : 'accent'" 
+    <app-activity-button (click)="entrarNaAtividade(atividade)" [type]="atividade.state == 'CREATED' ? 'gray' : 'accent'" 
     [label]="atividade.nome" [iconName]="atividade.state == 'CREATED' ? 'star-outline' : 'star'"></app-activity-button>
     <h6 class="atividade-nome">{{ atividade.title }}</h6>
   </div>

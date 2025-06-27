@@ -9,6 +9,8 @@ export class CursoService {
   cursoAtual: WritableSignal<any> = signal(null);
   http = inject(HttpClient);
 
+  atividadeAtual: WritableSignal<any> = signal(null);
+
   private baseUrl = 'https://turmalina-backend.onrender.com/turmalina';
   accessToken = window.localStorage.getItem("accessToken") || '';
 
@@ -63,5 +65,13 @@ export class CursoService {
 
   getCursoAtual() {
     return this.cursoAtual();
+  }
+
+  setAtividadeAtual(atividade: any) {
+    this.atividadeAtual.set(atividade);
+  }
+
+  getAtividadeAtual() {
+    return this.atividadeAtual();
   }
 }

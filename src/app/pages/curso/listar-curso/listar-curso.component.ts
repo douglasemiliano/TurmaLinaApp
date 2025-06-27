@@ -58,4 +58,6 @@ export class ListarCursoComponent implements OnInit {
     this.cursoService.setCursoAtual(curso);
   }
 
+
+
 }
