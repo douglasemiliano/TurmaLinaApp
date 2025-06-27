@@ -7,7 +7,7 @@ export const authConfig: AuthConfig = {
   issuer: 'https://accounts.google.com',
   strictDiscoveryDocumentValidation: false,
   clientId: environment.GOOGLE_CLIENT_ID,
-  redirectUri: 'http://localhost:4200/callback',
+  redirectUri: environment.REDIRECT_URI,
   scope: "openid profile email" + " " + 
   ClassroomScopes.CLASSROOM_COURSES + " " + 
   ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS + " " + 

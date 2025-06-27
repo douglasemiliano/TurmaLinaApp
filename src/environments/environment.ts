@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  GOOGLE_CLIENT_ID: "77186774552-da42u8o6391arqf1t9u5cn4g8icdbbn2.apps.googleusercontent.com",
-  REDIRECT_URI: "http://localhost:4200/callback",
+  GOOGLE_CLIENT_ID: "",
+  REDIRECT_URI: "",
 };
 
 /*
