@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   IonBackButton,
   IonButtons,
@@ -19,6 +19,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CursoService } from 'src/app/services/curso.service';
 import { TrilhaComponent } from '../trilha/trilha.component';
+import { RankingComponent } from '../../curso/ranking/ranking.component';
 
 @Component({
   selector: 'app-listar-atividade',
@@ -35,6 +36,7 @@ import { TrilhaComponent } from '../trilha/trilha.component';
     IonSegmentContent,
     IonSegmentView,
     TrilhaComponent,
+    RankingComponent,
     IonAvatar,
     IonContent,
     IonItem,
@@ -42,22 +44,24 @@ import { TrilhaComponent } from '../trilha/trilha.component';
     IonBadge,
   IonLabel]
 })
-export class ListarAtividadeComponent {
-
+export class ListarAtividadeComponent implements OnInit {
+  
   private cursoService = inject(CursoService);
   cursoAtual = this.cursoService.getCursoAtual();
-
+  
   currentStep: number = 0; // Para controlar o progresso da trilhas
-  atividades = [{id: 1, nome: "Apresentação", status: "concluido"}, 
-      {id: 2, nome: "Leitura dirigida", status: "concluido"}, 
-      {id: 3, nome: "Produzir Artigo", status: "atribuida"},
-      {id: 4, nome: "Seminário Design Thinking", status: "atribuida"}, 
-      {id: 5, nome: "Projeto de Vida", status: "concluido"},
-      {id: 6, nome: "Atividade 6", status: "atribuida"},
-      {id: 7, nome: "Atividade 7", status: "concluido"},
-      {id: 8, nome: "Atividade 8", status: "atribuida"},
-      {id: 9, nome: "Atividade 9", status: "concluido"},
-      {id: 10, nome: "Atividade 10", status: "atribuida"}];
+  // atividades = [{id: 1, nome: "Apresentação", status: "concluido"}, 
+  //   {id: 2, nome: "Leitura dirigida", status: "concluido"}, 
+  //   {id: 3, nome: "Produzir Artigo", status: "atribuida"},
+  //     {id: 4, nome: "Seminário Design Thinking", status: "atribuida"}, 
+  //     {id: 5, nome: "Projeto de Vida", status: "concluido"},
+  //     {id: 6, nome: "Atividade 6", status: "atribuida"},
+  //     {id: 7, nome: "Atividade 7", status: "concluido"},
+  //     {id: 8, nome: "Atividade 8", status: "atribuida"},
+  //     {id: 9, nome: "Atividade 9", status: "concluido"},
+  //     {id: 10, nome: "Atividade 10", status: "atribuida"}];
+
+  atividades: any[] = [];
       
   tabs = [
     {
@@ -92,7 +96,25 @@ export class ListarAtividadeComponent {
     { name: 'Marcos Teixeira', email: 'marcos.teixeira@email.com', photoUrl: 'https://randomuser.me/api/portraits/men/19.jpg', badges: [{ nome: 'Mestre', foto: '🧙🏾‍♂️' }, { nome: 'Explorador', foto: '🧑‍🚀' }] },
     { name: 'Renata Xavier', email: 'renata.xavier@email.com', photoUrl: 'https://randomuser.me/api/portraits/women/20.jpg', badges: [{ nome: 'Herói', foto: '🦸🏾‍♂️' }, { nome: 'Legendário', foto: '🌠' }] }
   ];
+  
+  ngOnInit(): void {
+    this.cursoService.getMinhasAtividades(this.cursoAtual.id).subscribe({
+      next: (atividades: any) => {
+        console.log(atividades);
+        this.atividades = atividades;
+      }});
 
+      this.cursoService.getRankingByCurso(this.cursoAtual.id).subscribe({
+        next: (ranking: any) => {
+
+          console.log(ranking);
+  
+        },
+        error: (error) => {
+          console.error('Erro ao carregar o ranking:', error);
+        }
+      })
+  }
   
   getPositionClass(index: number): string {
     const positions = ['item-left', 'item-middle', 'item-right', 'item-middle']; 

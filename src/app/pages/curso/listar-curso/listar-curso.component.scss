@@ -13,7 +13,11 @@ h3 {
     margin: 20px;
     // overflow: auto;
     background-color: var(--background-color);
-    height: 100vh;
+    // height: 100vh;
+}
+
+ion-skeleton-text {
+    background-color: var(--background-color);
 }
 
  .card {

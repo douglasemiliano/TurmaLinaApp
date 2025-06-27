@@ -1,8 +1,9 @@
 import { Component, inject, OnInit, Signal, WritableSignal } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { TabsPage } from './tabs/tabs.page';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CoreService } from './services/core.service';
+import { AuthGoogleService } from './services/auth/auth-google.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ export class AppComponent implements OnInit {
   paletteToggle = false;
 
   private coreService = inject(CoreService);
+  private authService = inject(AuthGoogleService);
+  private router = inject(Router);
 
   rotaAtual: Signal<string> = this.coreService.rotaAtual;
 
@@ -21,9 +24,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
+    this.redirectToLogin();
+
     console.log(location.pathname);
     console.log(this.rotaAtual());
-    
     
     this.coreService.atualizarRotaAtual(location.pathname);
     // Recuperar o valor do modo de tema do localStorage
@@ -57,5 +61,20 @@ export class AppComponent implements OnInit {
   // Adicionar ou remover a classe "ion-palette-dark" no elemento HTML
   toggleDarkPalette(shouldAdd: boolean) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+  }
+
+  redirectToLogin() {
+
+    setInterval(() => {
+      console.log("Verificando token de autenticação...");
+      if(!this.authService.isTokenValid()){
+        console.log("Token inválido, redirecionando para o login...");
+        this.router.navigate(['/login']);
+      }
+      console.log("Token de autenticação válido, continuando a navegação...");
+    }, 100000);
+
+    
+
   }
 }

@@ -1,7 +1,7 @@
 <div class="trilha">
   <div *ngFor="let atividade of atividades; let i = index" [class]="getPositionClass(i)">
-    <app-activity-button [type]="atividade.status == 'atribuida' ? 'gray' : 'accent'" 
-    [label]="atividade.nome" [iconName]="atividade.status == 'atribuida' ? 'star-outline' : 'star'"></app-activity-button>
-    <h6 class="atividade-nome">{{ atividade.nome }}</h6>
+    <app-activity-button [type]="atividade.state == 'CREATED' ? 'gray' : 'accent'" 
+    [label]="atividade.nome" [iconName]="atividade.state == 'CREATED' ? 'star-outline' : 'star'"></app-activity-button>
+    <h6 class="atividade-nome">{{ atividade.title }}</h6>
   </div>
 </div>

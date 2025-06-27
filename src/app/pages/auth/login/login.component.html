@@ -1,0 +1,19 @@
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <div class="logo-area">
+      <img [ngSrc]="'assets/turmalina.png'" alt="TurmaLina" width="200" height="200" priority class="logo">
+    </div>
+
+    <div class="animated-copy">
+      <p class="tagline">
+        Transforme suas turmas do <strong class="highlight">Google Classroom</strong> em uma jornada divertida e educativa com o <span class="highlight">TurmaLina!</span>
+      </p>
+    </div>
+
+    <ion-button expand="block" color="secondary" class="google-button" (click)="loginWithGoogle()">
+      <ion-icon name="logo-google" slot="start"></ion-icon>
+            Entrar com Google
+    </ion-button>
+
+  </div>
+</ion-content>

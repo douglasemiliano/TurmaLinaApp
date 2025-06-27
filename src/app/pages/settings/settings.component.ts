@@ -1,42 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent,
   IonIcon,
   IonItem,
-  IonLabel,
   IonList,
   IonListHeader,
-  IonRange,
-  IonText,
-  IonToggle,
-} from '@ionic/angular/standalone';
+  IonToggle, IonButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
+import { AuthGoogleService } from 'src/app/services/auth/auth-google.service';
 
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
-  imports: [
+  imports: [IonButton, 
     FormsModule,
     IonContent,
     IonIcon,
     IonItem,
-    IonLabel,
     IonList,
     IonListHeader,
-    IonRange,
-    IonText,
     IonToggle,
   ],
 })
 export class SettingsComponent implements OnInit {
   paletteToggle = false;
 
+  authService = inject(AuthGoogleService);
+
   constructor() {
     addIcons({ personCircle, personCircleOutline, sunny, sunnyOutline });
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
   ngOnInit() {
