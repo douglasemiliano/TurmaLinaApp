@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  googleClientId: ""
+  GOOGLE_CLIENT_ID: ""
 };
 
 /*

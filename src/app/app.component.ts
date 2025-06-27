@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log("Environment:", environment.googleClientId);
+    console.log("Environment:", environment.GOOGLE_CLIENT_ID);
     
 
     this.redirectToLogin();

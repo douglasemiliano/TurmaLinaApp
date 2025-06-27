@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 export const authConfig: AuthConfig = {
   issuer: 'https://accounts.google.com',
   strictDiscoveryDocumentValidation: false,
-  clientId: environment.googleClientId,
+  clientId: environment.GOOGLE_CLIENT_ID,
   redirectUri: 'http://localhost:4200/callback',
   scope: "openid profile email" + " " + 
   ClassroomScopes.CLASSROOM_COURSES + " " + 
