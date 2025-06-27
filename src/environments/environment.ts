@@ -2,9 +2,10 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
 export const environment = {
   production: false,
-  googleClientId: "77186774552-da42u8o6391arqf1t9u5cn4g8icdbbn2.apps.googleusercontent.com"
+  googleClientId: ""
 };
 
 /*

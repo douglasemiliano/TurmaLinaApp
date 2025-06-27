@@ -10,12 +10,7 @@ import {
   IonSegmentButton,
   IonSegmentContent,
   IonSegmentView,
-  IonLabel,
-  IonAvatar,
   IonContent,
-  IonItem,
-  IonList,
-  IonBadge,
 } from '@ionic/angular/standalone';
 import { CursoService } from 'src/app/services/curso.service';
 import { TrilhaComponent } from '../trilha/trilha.component';
@@ -37,12 +32,7 @@ import { RankingComponent } from '../../curso/ranking/ranking.component';
     IonSegmentView,
     TrilhaComponent,
     RankingComponent,
-    IonAvatar,
-    IonContent,
-    IonItem,
-    IonList,
-    IonBadge,
-  IonLabel]
+    IonContent]
 })
 export class ListarAtividadeComponent implements OnInit {
   
