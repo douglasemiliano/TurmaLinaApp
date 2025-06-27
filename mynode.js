@@ -6,6 +6,7 @@ const dotenv = require('dotenv').config({path: 'src/.env'}); ;
 
 const envFile = `export const environment = {
     GOOGLE_CLIENT_ID: '${process.env.GOOGLE_CLIENT_ID}',
+    REDIRECT_URI: '${process.env.REDIRECT_URI}',
 };
 `;
 const targetPath = path.join(__dirname, './src/environments/environment.prod.ts');
