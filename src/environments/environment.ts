@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  googleClientId: ""};
+  googleClientId: "77186774552-da42u8o6391arqf1t9u5cn4g8icdbbn2.apps.googleusercontent.com"
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

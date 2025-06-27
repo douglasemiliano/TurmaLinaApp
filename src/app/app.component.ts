@@ -4,6 +4,7 @@ import { TabsPage } from './tabs/tabs.page';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreService } from './services/core.service';
 import { AuthGoogleService } from './services/auth/auth-google.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log("Environment:", environment.googleClientId);
+    
 
     this.redirectToLogin();
 

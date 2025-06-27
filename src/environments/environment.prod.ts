@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  googleClientId: 'GOOGLE_CLIENT_ID_PLACEHOLDER'
+  googleClientId: 'GOOGLE_CLIENT_ID'
 };
