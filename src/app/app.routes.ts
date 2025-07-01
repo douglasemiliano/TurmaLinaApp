@@ -4,7 +4,7 @@ import { CallbackComponent } from './pages/auth/callback/callback.component';
 export const routes: Routes = [
   
   {path: '', loadComponent: () => import('./pages/loading/loading.component').then(m => m.LoadingComponent)},
-  { path: 'callback', component: CallbackComponent },
+  {path: 'callback', component: CallbackComponent },
   {path: 'login', loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)},
   {path: 'cursos', loadComponent: () => import("./pages/curso/listar-curso/listar-curso.component").then(m => m.ListarCursoComponent)},
   {path: 'cursos/:id', loadComponent: () => import('./pages/atividade/listar-atividade/listar-atividade.component').then(m => m.ListarAtividadeComponent)},

@@ -31,9 +31,6 @@ export class CallbackComponent implements OnInit {
           if (idToken) {
             localStorage.setItem("idToken", idToken);
           }
-
-          console.log('Access Token:', accessToken);
-          console.log('ID Token:', idToken);
         }
 
       }
@@ -65,7 +62,7 @@ export class CallbackComponent implements OnInit {
 
   ngAfterViewChecked(): void {
     setTimeout(() => {
-      this.router.navigate(["dashboard"])
+      this.router.navigate([""])
     }, 3000);
 
   }

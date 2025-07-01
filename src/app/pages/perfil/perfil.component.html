@@ -4,11 +4,11 @@
     <!-- <app-button type="icon" label="" [iconName]="getTheme() === 'dark-theme' ? 'dark_mode' : 'light_mode'" (click)="toggleTheme()"></app-button> -->
   </div>
 
-
+  
   <div class="perfil-info">
     <ion-avatar>
-      <img ngOptimizedImage [ngSrc]="'assets/default-avatar.png'" alt="Foto de {{ perfil().nome }}" width="100" height="100" priority
-        class="foto-perfil" (error)="perfil().foto = 'assets/default-avatar.png'">
+      <img ngOptimizedImage [ngSrc]="perfil().foto" alt="Foto de {{ perfil().nome }}" width="100" height="100" priority
+      class="foto-perfil" (error)="perfil().foto = 'assets/default-avatar.png'">
     </ion-avatar>
     
     <h2>{{ perfil().nome }}</h2>
@@ -22,8 +22,8 @@
     <h3>Conquistas</h3>
     <div class="badges-container" *ngIf="perfil().badges && perfil().badges.length > 0">
       <div *ngFor="let badge of perfil().badges" class="badge" [title]="badge">
-        {{ badge.split(' ')[1] }}
-        <span class="badge-tooltip">{{ badge }}</span>
+      <img ngOptimizedImage [ngSrc]="badge.imagem" alt="{{ badge.nome }}" width="50" height="50" style="border-radius: 20px;">
+        <span class="badge-tooltip">{{ badge.nome }}</span>
       </div>
     </div>
   </div>

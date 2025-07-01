@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { AuthGoogleService } from './auth/auth-google.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class CursoService {
 
   cursoAtual: WritableSignal<any> = signal(null);
   http = inject(HttpClient);
+  private authService = inject(AuthGoogleService); // Assuming you have an AuthGoogleService for authentication
 
   atividadeAtual: WritableSignal<any> = signal(null);
 
@@ -58,5 +60,9 @@ export class CursoService {
 
   getAtividadeAtual() {
     return this.atividadeAtual();
+  }
+
+  atualizarDadosAluno() {
+    return this.http.post(`${this.baseUrl}/login`, this.authService.gerarPerfilRequestDto());
   }
 }

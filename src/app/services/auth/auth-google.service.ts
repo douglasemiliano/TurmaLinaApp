@@ -1,7 +1,8 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authConfig } from './auth.config';
+import { PerfilRequestDto } from 'src/app/models/DTO.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,8 @@ export class AuthGoogleService {
   profile = signal<any>(null);
   idUser = signal<any>(null);
   private token = signal<any>(null);
+
+  private perfilRequestDto: WritableSignal<PerfilRequestDto> = signal(new PerfilRequestDto());
 
   constructor() {
     this.initConfiguration();
@@ -74,5 +77,13 @@ export class AuthGoogleService {
 
   getProfile() {
     return this.profile();
+  }
+
+  gerarPerfilRequestDto(): PerfilRequestDto {
+    this.perfilRequestDto().nome = this.profile().name;
+    this.perfilRequestDto().email = this.profile().email;
+    this.perfilRequestDto().foto = this.profile().picture;
+    this.perfilRequestDto().alunoId = this.idUser();
+    return this.perfilRequestDto();
   }
 }

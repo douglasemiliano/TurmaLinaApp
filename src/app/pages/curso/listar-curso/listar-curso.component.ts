@@ -34,7 +34,7 @@ export class ListarCursoComponent implements OnInit {
 
   cursos: any[] = [];
 
-    ngOnInit(): void {
+    ngOnInit(): void {      
       this.cursoService.getCursos().subscribe({
         next: (cursos: any) => {
           this.cursos = cursos;
