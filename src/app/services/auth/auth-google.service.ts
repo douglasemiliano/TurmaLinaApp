@@ -60,7 +60,8 @@ export class AuthGoogleService {
   }
 
   isTokenValid(): boolean {
-    return this.oAuthService.hasValidAccessToken();
+    const token = localStorage.getItem('accessToken');
+    return token != null && this.oAuthService.hasValidAccessToken();
   }
 
   getAccessToken(): string | null {
