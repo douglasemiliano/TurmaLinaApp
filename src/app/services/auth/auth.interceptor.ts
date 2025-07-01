@@ -15,8 +15,6 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
   
 
   if (token && authService.hasValidAccessToken()) {
-
-    
     if (req.url.startsWith(environment.BACKEND_URL)) {
       const authReq = req.clone({
         setHeaders: { accessToken: token }
@@ -25,7 +23,6 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
     } else {
       return next(req);
     }
-    
   }
   
   router.navigate(['/login']);

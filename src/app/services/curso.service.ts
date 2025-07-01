@@ -38,7 +38,10 @@ export class CursoService {
 
   getRankingGeral(cursoId: string) {
     return this.http.get(`${this.baseUrl}/v2/ranking/${cursoId}`);
+  }
 
+  getPerfilAluno(alunoId: string) {
+    return this.http.get(`${this.baseUrl}/perfil/${alunoId}`)
   }
 
   setCursoAtual(curso: any) {

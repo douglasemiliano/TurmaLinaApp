@@ -7,7 +7,7 @@
 
   <div class="perfil-info">
     <ion-avatar>
-      <img ngOptimizedImage [ngSrc]="perfil().foto" alt="Foto de {{ perfil().nome }}" width="100" height="100" priority
+      <img ngOptimizedImage [ngSrc]="'assets/default-avatar.png'" alt="Foto de {{ perfil().nome }}" width="100" height="100" priority
         class="foto-perfil" (error)="perfil().foto = 'assets/default-avatar.png'">
     </ion-avatar>
     
@@ -21,9 +21,9 @@
   <div class="conquistas-container">
     <h3>Conquistas</h3>
     <div class="badges-container" *ngIf="perfil().badges && perfil().badges.length > 0">
-      <div *ngFor="let badge of perfil().badges" class="badge" [title]="badge.nome">
-        {{ badge.foto }}
-        <span class="badge-tooltip">{{ badge.nome }}</span>
+      <div *ngFor="let badge of perfil().badges" class="badge" [title]="badge">
+        {{ badge.split(' ')[1] }}
+        <span class="badge-tooltip">{{ badge }}</span>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
 
 }
 @else {
-<div class="container d-flex align-items-center justify-content-center" style="height: 95vh;">
-  <iframe src="https://lottie.host/embed/0cd806cd-92f1-48a7-8da1-e8bae69c557e/XVNrC79h4w.lottie"></iframe>
-</div>
+<div class="perfil-container">
+  <p>Carregando perfil...</p> 
+  </div>
 }

@@ -1,7 +1,8 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { IonAvatar } from '@ionic/angular/standalone';
 import { ProgressBarComponent } from '../../components/progress-bar/progress-bar.component';
+import { CursoService } from 'src/app/services/curso.service';
 
 @Component({
   selector: 'app-perfil',
@@ -24,28 +25,43 @@ export class PerfilComponent {
     {label: 'Zebra', path:'assets/zebra.png'},
   ];
   perfil: WritableSignal<any> = signal<any>(null);
+  private cursoService = inject(CursoService);
+  private userId = localStorage.getItem('userId');
 
   constructor() {
     if(typeof window !== 'undefined') {
-      const perfil = window.localStorage.getItem('perfil');
-      if(perfil) {
-        this.perfil.set(JSON.parse(perfil));
-      } else {
-        this.perfil.set({nome: 'Douglas Emiliano', email: 'emaildedouglas@gmail.com', foto: 'assets/lion.png', 
-          badges: [
-            { nome: 'Explorador', foto: '🧑‍🚀' }, // Explorador com emoji de astronauta (tom mais escuro)
-            { nome: 'Finalizador', foto: '🏊🏾‍♂️' }, // Finalizador com emoji de nadador (tom mais escuro)
-            { nome: 'Aventureiro', foto: '🧗🏾‍♂️' }, // Aventureiro com emoji de alpinista (tom mais escuro)
-            { nome: 'Iniciante', foto: '👣' }, // Iniciante com emoji de pegada (não é amarelo)
-            { nome: 'Conquistador', foto: '🏅' }, // Conquistador com emoji de medalha (tom mais escuro)
-            { nome: 'Guerreiro', foto: '🛡️' }, // Guerreiro com emoji de escudo
-            { nome: 'Mestre', foto: '🧙🏾‍♂️' }, // Mestre com emoji de mago (tom mais escuro)
-            { nome: 'Líder', foto: '👑' }, // Líder com emoji de coroa (tom mais escuro)
-            { nome: 'Herói', foto: '🦸🏾‍♂️' }, // Herói com emoji de super-herói (tom mais escuro)
-            { nome: 'Legendário', foto: '🌠' } 
-          ]  }
-        );
+
+      if(this.userId == null) {
+        
+      } else {        
+        this.cursoService.getPerfilAluno(this.userId).subscribe({
+          next: (perfil: any) => {
+            console.log(perfil);
+            this.perfil.set(perfil);
+          }
+        })
       }
+
+
+      // const perfil = window.localStorage.getItem('perfil');
+      // if(perfil) {
+      //   this.perfil.set(JSON.parse(perfil));
+      // } else {
+      //   this.perfil.set({nome: 'Douglas Emiliano', email: 'emaildedouglas@gmail.com', foto: 'assets/lion.png', 
+      //     badges: [
+      //       { nome: 'Explorador', foto: '🧑‍🚀' }, // Explorador com emoji de astronauta (tom mais escuro)
+      //       { nome: 'Finalizador', foto: '🏊🏾‍♂️' }, // Finalizador com emoji de nadador (tom mais escuro)
+      //       { nome: 'Aventureiro', foto: '🧗🏾‍♂️' }, // Aventureiro com emoji de alpinista (tom mais escuro)
+      //       { nome: 'Iniciante', foto: '👣' }, // Iniciante com emoji de pegada (não é amarelo)
+      //       { nome: 'Conquistador', foto: '🏅' }, // Conquistador com emoji de medalha (tom mais escuro)
+      //       { nome: 'Guerreiro', foto: '🛡️' }, // Guerreiro com emoji de escudo
+      //       { nome: 'Mestre', foto: '🧙🏾‍♂️' }, // Mestre com emoji de mago (tom mais escuro)
+      //       { nome: 'Líder', foto: '👑' }, // Líder com emoji de coroa (tom mais escuro)
+      //       { nome: 'Herói', foto: '🦸🏾‍♂️' }, // Herói com emoji de super-herói (tom mais escuro)
+      //       { nome: 'Legendário', foto: '🌠' } 
+      //     ]  }
+      //   );
+      // }
     } 
   }
 
