@@ -6,7 +6,7 @@ import {
   IonItem,
   IonList,
   IonListHeader,
-  IonToggle, IonButton } from '@ionic/angular/standalone';
+  IonToggle, IonButton, IonHeader, IonToolbar, IonTitle, IonButtons } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
 import { AuthGoogleService } from 'src/app/services/auth/auth-google.service';
@@ -23,7 +23,11 @@ import { ModalController } from '@ionic/angular';
     IonItem,
     IonList,
     IonListHeader,
-    IonToggle
+    IonToggle,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons
   ],
   providers:[ModalController]
 })
@@ -39,6 +43,10 @@ export class SettingsComponent implements OnInit {
 
   logout(){
     this.authService.logout();
+    this.modalController.dismiss();
+  }
+
+  cancel(){
     this.modalController.dismiss();
   }
 

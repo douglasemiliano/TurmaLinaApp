@@ -42,6 +42,7 @@ export class AuthGoogleService {
     window.localStorage.clear();
     this.profile.set(null);
     this.router.navigate(['/login']);
+    window.location.reload();
   }
 
   private updateUserData() {
