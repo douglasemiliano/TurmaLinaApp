@@ -35,11 +35,8 @@ export class ListarCursoComponent implements OnInit {
   cursos: any[] = [];
 
     ngOnInit(): void {
-      console.log(this.authService.isTokenValid());
-      
       this.cursoService.getCursos().subscribe({
         next: (cursos: any) => {
-          console.log(cursos);
           this.cursos = cursos;
         },
         error: (error) => {

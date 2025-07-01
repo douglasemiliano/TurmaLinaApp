@@ -3,32 +3,17 @@ import { ActivityButtonComponent } from '../../../components/activity-button/act
 import { CommonModule } from '@angular/common';
 import { CursoService } from 'src/app/services/curso.service';
 import { Router } from '@angular/router';
-import { IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonItem,
+import { 
   IonModal,
-  IonTitle,
-  IonToolbar,ModalController  } from "@ionic/angular/standalone";
+  ModalController  } from "@ionic/angular/standalone";
 import { FormsModule } from '@angular/forms';
-import { OverlayEventDetail } from '@ionic/core/components';
 import { DetalharAtividadeComponent } from "../detalhar-atividade/detalhar-atividade.component";
 @Component({
   selector: 'app-trilha',
   templateUrl: './trilha.component.html',
   styleUrls: ['./trilha.component.scss'],
-  imports: [IonButton, IonContent, ActivityButtonComponent, CommonModule,
-    FormsModule,
-    IonButton,
-    IonButtons,
-    IonContent,
-    IonHeader,
-    IonModal,
-    IonTitle,
-    IonToolbar,
-    DetalharAtividadeComponent]
+  imports: [ActivityButtonComponent, CommonModule,
+    FormsModule]
 })
 export class TrilhaComponent  {
 
@@ -54,11 +39,7 @@ export class TrilhaComponent  {
   }
 
   setAtividadeAtual(atividade: any) {
-    console.log('setou');
-    
     this.cursoService.setAtividadeAtual(atividade);
-    console.log(this.cursoService.getAtividadeAtual());
-    
   }
 
   async openModal() {

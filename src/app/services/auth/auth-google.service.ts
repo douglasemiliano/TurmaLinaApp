@@ -46,7 +46,6 @@ export class AuthGoogleService {
 
   private updateUserData() {
     const claims = this.oAuthService.getIdentityClaims();
-    console.log(claims);
     
     if (claims) {
       this.profile.set(claims);

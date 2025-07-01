@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   GOOGLE_CLIENT_ID: "",
   REDIRECT_URI: "",
+  BACKEND_URL: "https://turmalina.koyeb.app/turmalina",
 };
 
 /*

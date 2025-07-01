@@ -9,7 +9,7 @@ import lottie from 'lottie-web';
   styleUrls: ['./callback.component.scss'],
   imports: [IonContent]
 })
-export class CallbackComponent  implements OnInit {
+export class CallbackComponent implements OnInit {
 
   private router = inject(Router);
   private route = inject(ActivatedRoute);
@@ -17,34 +17,33 @@ export class CallbackComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
-    console.log(this.route.fragment.subscribe({
+    this.route.fragment.subscribe({
       next: (fragment) => {
-        if(fragment) {
+        if (fragment) {
           const params = new URLSearchParams(fragment);
           const accessToken = params.get('access_token');
           const idToken = params.get('id_token');
-          
+
           if (accessToken) {
             localStorage.setItem("accessToken", accessToken);
           }
-          
+
           if (idToken) {
             localStorage.setItem("idToken", idToken);
           }
-          
+
           console.log('Access Token:', accessToken);
           console.log('ID Token:', idToken);
         }
-        
+
       }
-    }));
-    
+    });
+
 
     this.carregarAnimacao();
   }
-  
-  carregarAnimacao(){
+
+  carregarAnimacao() {
     lottie.loadAnimation({
       container: document.getElementById('success-animation')!,
       renderer: 'svg',
@@ -68,7 +67,7 @@ export class CallbackComponent  implements OnInit {
     setTimeout(() => {
       this.router.navigate(["dashboard"])
     }, 3000);
-    
-}
+
+  }
 
 }

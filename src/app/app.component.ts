@@ -24,15 +24,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log("Environment:", environment.GOOGLE_CLIENT_ID);
-    
-
-    this.redirectToLogin();
-
-    console.log(location.pathname);
-    console.log(this.rotaAtual());
-    
     this.coreService.atualizarRotaAtual(location.pathname);
     // Recuperar o valor do modo de tema do localStorage
     const storedTheme = localStorage.getItem('theme');
@@ -65,20 +56,5 @@ export class AppComponent implements OnInit {
   // Adicionar ou remover a classe "ion-palette-dark" no elemento HTML
   toggleDarkPalette(shouldAdd: boolean) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
-  }
-
-  redirectToLogin() {
-
-    setInterval(() => {
-      console.log("Verificando token de autenticação...");
-      if(!this.authService.isTokenValid()){
-        console.log("Token inválido, redirecionando para o login...");
-        this.router.navigate(['/login']);
-      }
-      console.log("Token de autenticação válido, continuando a navegação...");
-    }, 100000);
-
-    
-
   }
 }

@@ -50,14 +50,11 @@ export class PerfilComponent {
   }
 
   closeCard() {
-    console.log("entrou no closeCard");
     this.isOpen = false; // Fecha o card quando recebe o evento
   }
 
   toggleCard() {
     this.isOpen = !this.isOpen;
-    console.log(this.isOpen);
-    
   }
 
   updateFoto(foto: string) {

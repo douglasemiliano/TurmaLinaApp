@@ -32,8 +32,6 @@ export class RankingComponent  implements OnInit {
     this.cursoService.getRankingGeral(this.cursoAtual.id).subscribe({
       next: (ranking: any) => {
         this.ranking = ranking.alunos;
-        console.log(ranking);
-
       },
       error: (error) => {
         console.error('Erro ao carregar o ranking:', error);

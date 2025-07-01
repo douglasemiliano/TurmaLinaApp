@@ -21,13 +21,10 @@ export class Tab1Page implements OnInit {
 
   constructor() {
     addIcons({ barbell, basket, call, globe, heart, home, person, pin, star, trash, people, map });
-    this.coreService.atualizarRotaAtual(location.pathname);
-    console.log(location.pathname);
-    
+    this.coreService.atualizarRotaAtual(location.pathname);    
   }
 
   ngOnInit(): void {
-    console.log("entrou");
     
   }
 

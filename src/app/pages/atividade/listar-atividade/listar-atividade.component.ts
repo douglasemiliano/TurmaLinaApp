@@ -90,7 +90,6 @@ export class ListarAtividadeComponent implements OnInit {
   ngOnInit(): void {
     this.cursoService.getMinhasAtividades(this.cursoAtual.id).subscribe({
       next: (atividades: any) => {
-        console.log(atividades);
         this.atividades = atividades;
       }});
 
