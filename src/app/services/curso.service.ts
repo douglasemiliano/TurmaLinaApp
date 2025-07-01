@@ -12,7 +12,7 @@ export class CursoService {
 
   atividadeAtual: WritableSignal<any> = signal(null);
 
-  private baseUrl = environment.BACKEND_URL || 'http://localhost:8080/turmalina';
+  private baseUrl = environment.BACKEND_URL;
   accessToken = window.localStorage.getItem("accessToken") || '';
 
   idUser = window.localStorage.getItem("userId") || '';
