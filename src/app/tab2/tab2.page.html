@@ -1,26 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Photo Gallery</ion-title>
+    <ion-title>Receber Badges</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <!-- Input para código do badge -->
+  <div class="badge-input-container">
+    <ion-item>
+      <ion-label position="floating">Código do Badge</ion-label>
+      <ion-input
+        [(ngModel)]="badgeCode"
+        maxlength="8"
+        placeholder="Digite o código de 8 dígitos"
+        type="text"
+      ></ion-input>
+    </ion-item>
+    <ion-button expand="block" color="primary" (click)="redeemBadge()">
+      Resgatar Badge
+    </ion-button>
+  </div>
 
-  <ion-content>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6" *ngFor="let photo of photoService.photos; index as position">
-          <ion-img [src]="photo.webviewPath"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  
-    <!-- ion-fab markup  -->
-  </ion-content>
+  <!-- Leitura de QR Code -->
+  <div class="qr-code-container">
+    <h2>Ou leia um QR Code</h2>
+    <video #video autoplay></video>
+    <ion-button expand="block" color="secondary" (click)="scanQRCode()">
+      <ion-icon name="qr-code-outline" slot="start"></ion-icon>
+      Ler QR Code
+    </ion-button>
+  </div>
 
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="addPhotoToGallery()">
-      <ion-icon name="camera"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <!-- Exibição de fotos capturadas -->
+
 </ion-content>

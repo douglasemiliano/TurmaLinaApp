@@ -6,6 +6,8 @@ import { UserPhoto } from '../models/UserPhoto.model';
 
 import { Platform } from '@ionic/angular';
 import { Capacitor } from '@capacitor/core';
+import { BrowserMultiFormatReader } from '@zxing/library';
+
 
 @Injectable({
   providedIn: 'root'
@@ -117,6 +119,17 @@ private async savePicture(photo: Photo) {
         // Web platform only: Load the photo as base64 data
         photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
       }
+    }
+  }
+
+  async scanQRCode(videoElement: HTMLVideoElement): Promise<string | null> {
+    try {
+      const codeReader = new BrowserMultiFormatReader(); // Substitui BrowserQRCodeReader
+      const result = await codeReader.decodeOnceFromVideoDevice(undefined, videoElement);
+      return result.getText(); // Retorna o conteúdo do QR Code
+    } catch (error) {
+      console.error('Erro ao escanear QR Code:', error);
+      return null;
     }
   }
 

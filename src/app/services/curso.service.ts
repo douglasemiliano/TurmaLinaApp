@@ -46,6 +46,14 @@ export class CursoService {
     return this.http.get(`${this.baseUrl}/perfil/${alunoId}`)
   }
 
+  gerarCodigoResgate(idCurso: string) {
+    return this.http.post(`${this.baseUrl}/badge/${idCurso}/gerar-codigo`, {})
+  }
+
+  resgatarBadge(codigo: string) {
+    return this.http.post(`${this.baseUrl}/badge/resgatar?code=${codigo}&userId=${this.idUser}`, {});
+  }
+
   setCursoAtual(curso: any) {
     this.cursoAtual.set(curso);
   }

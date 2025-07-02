@@ -33,6 +33,7 @@
     "@capacitor/status-bar": "7.0.0",
     "@ionic/angular": "^8.0.0",
     "@ionic/pwa-elements": "^3.3.0",
+    "@zxing/library": "^0.21.3",
     "angular-oauth2-oidc": "^17.0.2",
     "dotenv": "^16.6.1",
     "ionicons": "^7.0.0",
