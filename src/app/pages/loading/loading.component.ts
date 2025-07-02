@@ -20,7 +20,7 @@ export class LoadingComponent  implements OnInit {
   private cursoService = inject(CursoService);
 
   ngOnInit() {
-    setTimeout(() => {
+
       if(this.authService.isTokenValid()){
         this.cursoService.atualizarDadosAluno().subscribe({
           next: (response) => {
@@ -33,8 +33,6 @@ export class LoadingComponent  implements OnInit {
       } else {
         this.router.navigateByUrl("/login");
       }
-    }, 5000
-  );
   }
 
 }

@@ -56,7 +56,7 @@ export class Tab2Page {
   resgatar(codigo: string){
     this.cursoService.resgatarBadge(codigo).subscribe({
       next:(response: any) =>{
-        alert(response)
+        alert(response.nome)
       }, error: (error: any) => {
         alert(error.error.text)
       }
