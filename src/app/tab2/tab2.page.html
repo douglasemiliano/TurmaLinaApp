@@ -7,15 +7,9 @@
 <ion-content class="ion-padding">
   <!-- Input para código do badge -->
   <div class="badge-input-container">
-    <ion-item>
-      <ion-label position="floating">Código do Badge</ion-label>
-      <ion-input
-        [(ngModel)]="badgeCode"
-        maxlength="8"
-        placeholder="Digite o código de 8 dígitos"
-        type="text"
-      ></ion-input>
-    </ion-item>
+    <div style="display: flex; justify-content: center; align-items: center; height: 50px; width: 100%; margin-bottom: 10px; margin-top: 1rem;">
+      <ng-otp-input class="otp-input" [formControl]="otp" [config]="config"></ng-otp-input>
+    </div>
     <ion-button expand="block" color="primary" (click)="redeemBadge()">
       Resgatar Badge
     </ion-button>
@@ -23,7 +17,7 @@
 
   <!-- Leitura de QR Code -->
   <div class="qr-code-container">
-    <h2>Ou leia um QR Code</h2>
+    <h2 style="text-align: center;">Ou leia um QR Code</h2>
     <video #video autoplay></video>
     <ion-button expand="block" color="secondary" (click)="scanQRCode()">
       <ion-icon name="qr-code-outline" slot="start"></ion-icon>

@@ -3,19 +3,28 @@ import { IonHeader, IonIcon, IonInput, IonToolbar, IonItem, IonButton, IonConten
 
 import { PhotoService } from '../services/photo.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CursoService } from '../services/curso.service';
-
+import { NgOtpInputComponent, NgOtpInputConfig } from 'ng-otp-input';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonToolbar, IonContent, IonButton, IonItem, IonLabel, IonTitle, FormsModule, IonInput, IonHeader, IonIcon, CommonModule]
+  imports: [IonToolbar, IonContent, ReactiveFormsModule, NgOtpInputComponent, IonButton, IonItem, IonLabel, IonTitle, FormsModule, IonInput, IonHeader, IonIcon, CommonModule]
 })
 export class Tab2Page {
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>; // Referência ao elemento <video>
-  badgeCode: string = '';
+  badgeCode = '';
+  otp:FormControl = new FormControl();
+  config: NgOtpInputConfig = {
+    allowNumbersOnly: false,
+    length: 6,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: '',
+    separator:'-'
+  };
   badges: Array<{ title: string; image: string }> = [];
 
   private cursoService = inject(CursoService);
