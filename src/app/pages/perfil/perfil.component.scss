@@ -50,7 +50,6 @@
                 max-width: 350px;
                 display: flex;
                 flex-direction: row;
-                align-items: center;
                 justify-content: center;
                 flex-wrap: wrap;
                 gap: 10px;
@@ -65,7 +64,7 @@
             & .badge {
                 width: 60px !important;
                 height: 60px !important;
-                border-radius: 50%;
+                border-radius: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;

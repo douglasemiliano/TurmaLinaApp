@@ -39,13 +39,15 @@ export class AuthGoogleService {
   }
   
 
-  logout() {
+  logout(navegar: boolean = true) {
     this.oAuthService.revokeTokenAndLogout();
     this.oAuthService.logOut();
     window.localStorage.clear();
     this.profile.set(null);
-    this.router.navigate(['/login']);
-    window.location.reload();
+    if(navegar) {
+      this.router.navigate(['/login']);
+      window.location.reload();
+    }
   }
 
   private updateUserData() {

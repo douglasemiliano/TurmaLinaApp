@@ -6,22 +6,33 @@
   </ion-header>
 <ion-content>
     <h3>Meus Cursos</h3>
-    
-    @if (cursos.length > 0) {
-        <div class="cursos-container">
-            @for (curso of cursos; track curso.id) {
-                <div class="card" (click)="entrarNoCurso(curso)">
-                    <div class="image">
-                        <img src="https://i9acao.com.br/wp-content/uploads/2022/03/4-SAIB1.png" alt="">
+
+    @if(cursos){
+        @if (cursos.length > 0) {
+            <div class="cursos-container">
+                @for (curso of cursos; track curso.id) {
+                    <div class="card" (click)="entrarNoCurso(curso)">
+                        <div class="image">
+                            <img src="https://i9acao.com.br/wp-content/uploads/2022/03/4-SAIB1.png" alt="">
+                        </div>
+                    <div class="content">
+                        <h4>{{curso.name}}</h4>
+                        <h5>Seção: {{curso.section}}</h5>            
                     </div>
-                <div class="content">
-                    <h4>{{curso.name}}</h4>
-                    <h5>Seção: {{curso.section}}</h5>            
                 </div>
+                }
             </div>
-            }
-        </div>
-    } @else {
+        } @else if (cursos.length === 0) {
+            <ion-content class="ion-padding">
+                <div class="">
+                      <img src="assets/animations/empty-state.gif" alt="">
+                  <h2>Nada encontrado!</h2>
+                  <p>Você não está matriculado em nenhum curso.</p>
+                </div>
+              </ion-content>
+        }
+    }
+    @else {
         <div class="cursos-container">
             <div class="card">
                 <div class="image">

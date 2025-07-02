@@ -1,17 +1,20 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { IonHeader, IonIcon, IonInput, IonToolbar, IonItem, IonButton, IonContent, IonTitle, IonLabel } from '@ionic/angular/standalone';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { IonHeader, IonIcon, IonToolbar, IonButton, IonContent, IonTitle } from '@ionic/angular/standalone';
 
 import { PhotoService } from '../services/photo.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CursoService } from '../services/curso.service';
 import { NgOtpInputComponent, NgOtpInputConfig } from 'ng-otp-input';
+import { ModalController } from "@ionic/angular/standalone";
+import { QrCodeComponent } from '../components/qr-code/qr-code.component';
+
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonToolbar, IonContent, ReactiveFormsModule, NgOtpInputComponent, IonButton, IonItem, IonLabel, IonTitle, FormsModule, IonInput, IonHeader, IonIcon, CommonModule]
+  imports: [IonToolbar, IonContent, ReactiveFormsModule, NgOtpInputComponent, IonButton, IonTitle, FormsModule, IonHeader, IonIcon, CommonModule]
 })
 export class Tab2Page {
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>; // Referência ao elemento <video>
@@ -28,6 +31,7 @@ export class Tab2Page {
   badges: Array<{ title: string; image: string }> = [];
 
   private cursoService = inject(CursoService);
+  modalCtrl = inject(ModalController)
 
   constructor(public photoService: PhotoService) {}
 
@@ -66,5 +70,15 @@ export class Tab2Page {
       alert('Código inválido! Certifique-se de que possui 8 dígitos.');
     }
   }
+
+    async abrirModalQrCode() {
+      const modal = await this.modalCtrl.create({
+        component: QrCodeComponent,
+      });
+      modal.present();
+  
+    }
+
+  
 }
 
