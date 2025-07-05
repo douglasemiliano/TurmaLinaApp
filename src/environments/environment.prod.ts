@@ -1,7 +1,13 @@
 export const environment = {
-  production: true,
-  GOOGLE_CLIENT_ID: '',
-  REDIRECT_URI: '',
-  BACKEND_URL: "https://turmalina-backend.onrender.com/turmalina",
-  FIREBASE: ""
+    GOOGLE_CLIENT_ID: 'your-google-client-id',
+    REDIRECT_URI: 'undefined',
+    BACKEND_URL: 'undefined',
+    FIREBASE: {
+        apiKey: 'undefined',
+        authDomain: 'undefined',
+        projectId: 'undefined',
+        storageBucket: 'undefined',
+        messagingSenderId: 'undefined',
+        appId: 'undefined'
+  }
 };

@@ -8,7 +8,14 @@ const envFile = `export const environment = {
     GOOGLE_CLIENT_ID: '${process.env.GOOGLE_CLIENT_ID}',
     REDIRECT_URI: '${process.env.REDIRECT_URI}',
     BACKEND_URL: '${process.env.BACKEND_URL}',
-    FIREBASE: '${process.env.FIREBASE}',
+    FIREBASE: {
+        apiKey: '${process.env.FIREBASE_API_KEY}',
+        authDomain: '${process.env.FIREBASE_AUTH_DOMAIN}',
+        projectId: '${process.env.FIREBASE_PROJECT_ID}',
+        storageBucket: '${process.env.FIREBASE_STORAGE_BUCKET}',
+        messagingSenderId: '${process.env.FIREBASE_MESSAGISENDER_ID}',
+        appId: '${process.env.FIREBASE_APP_ID}'
+  }
 };
 `;
 const targetPath = path.join(__dirname, './src/environments/environment.prod.ts');
