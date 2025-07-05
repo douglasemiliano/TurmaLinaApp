@@ -14,7 +14,7 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
   const router = inject(Router);
   
 
-  if (token && authService.hasValidAccessToken()) {
+  if (token) {
     if (req.url.startsWith(environment.BACKEND_URL)) {
       const authReq = req.clone({
         setHeaders: { accessToken: token }

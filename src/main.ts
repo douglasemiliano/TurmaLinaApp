@@ -8,6 +8,9 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { OAuthService, provideOAuthClient } from 'angular-oauth2-oidc';
 import { AuthInterceptor } from './app/services/auth/auth.interceptor';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { environment } from './environments/environment';
 
 // Call the element loader before the bootstrapModule/bootstrapApplication call
 defineCustomElements(window);
@@ -18,6 +21,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([AuthInterceptor])),
     provideOAuthClient(),
-
+    provideFirebaseApp(() => initializeApp(environment.FIREBASE)),
+    provideAuth(() => getAuth())
   ],
 });

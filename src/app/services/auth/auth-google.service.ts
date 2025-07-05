@@ -1,76 +1,92 @@
 import { Injectable, inject, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { authConfig } from './auth.config';
+import { Auth, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 import { PerfilRequestDto } from 'src/app/models/DTO.model';
+import { ClassroomScopes } from './classroom-scopes.constants';
+import { Oauth2Scopes } from './oauth2-scopes.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGoogleService {
-  private oAuthService = inject(OAuthService);
+  private auth = inject(Auth);
   private router = inject(Router);
-  profile = signal<any>(null);
-  idUser = signal<any>(null);
-  private token = signal<any>(null);
 
+  profile = signal<any>(null);
+  idUser = signal<string | null>(null);
+  private token = signal<string | null>(null);
   private perfilRequestDto: WritableSignal<PerfilRequestDto> = signal(new PerfilRequestDto());
 
   constructor() {
-    this.initConfiguration();
+    this.loadFromStorage();
   }
 
-  private async initConfiguration() {
-    this.oAuthService.configure(authConfig);
-    this.oAuthService.setupAutomaticSilentRefresh();
-
+  async login() {
     try {
-      await this.oAuthService.loadDiscoveryDocumentAndTryLogin();
-      if (this.oAuthService.hasValidAccessToken()) {
-        this.updateUserData();
-      }
-    } catch (error) {
-      console.error('Erro ao carregar o login:', error);
+      const provider = new GoogleAuthProvider();
+    provider.addScope(ClassroomScopes.CLASSROOM_COURSES),
+    provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS),
+    provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS_READONLY),
+    provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME),
+    provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME_READONLY),
+    provider.addScope(ClassroomScopes.CLASSROOM_ROSTERS),
+    provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_EMAILS),
+    provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_PHOTOS),
+    provider.addScope(Oauth2Scopes.USERINFO_PROFILE);
+
+      const result = await signInWithPopup(this.auth, provider);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const accessToken = credential?.accessToken ?? null;
+
+      const user = result.user;
+
+      this.profile.set(user);
+      this.idUser.set(user.uid);
+      this.token.set(accessToken);
+
+      console.log(result.user.providerData[0]);
+      
+
+      localStorage.setItem('accessToken', accessToken || '');
+      localStorage.setItem('userId', user.providerData[0].uid);
+      localStorage.setItem('profile', JSON.stringify(user));
+      this.router.navigate(['']);
+
+    } catch (err) {
+      console.error('Erro ao fazer login com Google Firebase:', err);
     }
   }
-
-  login() {
-    this.oAuthService.initCodeFlow(); // Usando Code Flow com PKCE
-  }
-  
 
   logout(navegar: boolean = true) {
-    this.oAuthService.revokeTokenAndLogout();
-    this.oAuthService.logOut();
-    window.localStorage.clear();
-    this.profile.set(null);
-    if(navegar) {
-      this.router.navigate(['/login']);
-      window.location.reload();
-    }
+    signOut(this.auth).then(() => {
+      localStorage.clear();
+      this.profile.set(null);
+      this.idUser.set(null);
+      this.token.set(null);
+
+      if (navegar) {
+        this.router.navigate(['/login']);
+        window.location.reload();
+      }
+    });
   }
 
-  private updateUserData() {
-    const claims = this.oAuthService.getIdentityClaims();
-    
-    if (claims) {
-      this.profile.set(claims);
-      this.idUser.set(claims['sub']);
-      this.token.set(this.oAuthService.getAccessToken());
-      localStorage.setItem("accessToken", this.oAuthService.getAccessToken());
-      localStorage.setItem("userId", this.oAuthService.getIdentityClaims()['sub'])
-      localStorage.setItem("profile", JSON.stringify(this.oAuthService.getIdentityClaims()));
+  private loadFromStorage() {
+    const profile = localStorage.getItem('profile');
+    const userId = localStorage.getItem('userId');
+    const accessToken = localStorage.getItem('accessToken');
 
-    }
+    if (profile) this.profile.set(JSON.parse(profile));
+    if (userId) this.idUser.set(userId);
+    if (accessToken) this.token.set(accessToken);
   }
 
   isTokenValid(): boolean {
-    const token = localStorage.getItem('accessToken');
-    return token != null && this.oAuthService.hasValidAccessToken();
+    return true;
   }
 
   getAccessToken(): string | null {
-    return this.oAuthService.getAccessToken();
+    return this.token();
   }
 
   getUserId(): string | null {
@@ -82,10 +98,10 @@ export class AuthGoogleService {
   }
 
   gerarPerfilRequestDto(): PerfilRequestDto {
-    this.perfilRequestDto().nome = this.profile().name;
-    this.perfilRequestDto().email = this.profile().email;
-    this.perfilRequestDto().foto = this.profile().picture;
-    this.perfilRequestDto().alunoId = this.idUser();
+    this.perfilRequestDto().nome = this.profile()?.displayName;
+    this.perfilRequestDto().email = this.profile()?.email;
+    this.perfilRequestDto().foto = this.profile()?.photoURL;
+    this.perfilRequestDto().alunoId = this.idUser()!;
     return this.perfilRequestDto();
   }
 }

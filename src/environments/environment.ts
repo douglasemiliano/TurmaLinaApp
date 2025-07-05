@@ -5,9 +5,17 @@
 
 export const environment = {
   production: false,
-  GOOGLE_CLIENT_ID: "",
-  REDIRECT_URI: "",
-  BACKEND_URL: "https://turmalina.koyeb.app/turmalina",
+  GOOGLE_CLIENT_ID: "77186774552-da42u8o6391arqf1t9u5cn4g8icdbbn2.apps.googleusercontent.com",
+  REDIRECT_URI: "http://localhost:4200/callback",
+  BACKEND_URL: "http://localhost:8080/turmalina",
+  FIREBASE: {
+  apiKey: "AIzaSyBsQG6Fo19sQNq1qlwzYlxNPo8uhx48Qpw",
+  authDomain: "turmalina-classroom2.firebaseapp.com",
+  projectId: "turmalina-classroom2",
+  storageBucket: "turmalina-classroom2.firebasestorage.app",
+  messagingSenderId: "221630329914",
+  appId: "1:221630329914:web:b315e5775cdedbf19f7103"
+}
 };
 
 /*
