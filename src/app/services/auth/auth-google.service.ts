@@ -41,7 +41,7 @@ export class AuthGoogleService {
       const user = result.user;
 
       this.profile.set(user);
-      this.idUser.set(user.uid);
+      this.idUser.set(user.providerData[0].uid);
       this.token.set(accessToken);
 
       console.log(result.user.providerData[0]);
