@@ -1,9 +1,13 @@
 import { Injectable, inject, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Auth, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, signInWithPopup, signOut, signInWithCredential } from '@angular/fire/auth';
 import { PerfilRequestDto } from 'src/app/models/DTO.model';
-import { ClassroomScopes } from './classroom-scopes.constants';
-import { Oauth2Scopes } from './oauth2-scopes.constants';
+import { isPlatform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { Capacitor } from '@capacitor/core';
+import { ClassroomScopes, getAllClassroomScopes } from './classroom-scopes.constants';
+import { getAllOath2Scopes, Oauth2Scopes } from './oauth2-scopes.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +15,7 @@ import { Oauth2Scopes } from './oauth2-scopes.constants';
 export class AuthGoogleService {
   private auth = inject(Auth);
   private router = inject(Router);
+  private platform = inject(Platform);
 
   profile = signal<any>(null);
   idUser = signal<string | null>(null);
@@ -19,41 +24,67 @@ export class AuthGoogleService {
 
   constructor() {
     this.loadFromStorage();
+
+    // ⚠️ Só inicializa o plugin em dispositivos nativos
+    if (Capacitor.isNativePlatform()) {
+      GoogleAuth.initialize({
+        clientId: 'SEU_WEB_CLIENT_ID_DO_FIREBASE.apps.googleusercontent.com',
+        scopes: getAllClassroomScopes().concat(getAllOath2Scopes())
+      });
+    }
   }
 
   async login() {
     try {
+      let userData: any;
+      let accessToken: string | null = null;
+
       const provider = new GoogleAuthProvider();
-    provider.addScope(ClassroomScopes.CLASSROOM_COURSES),
-    provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS),
-    provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS_READONLY),
-    provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME),
-    provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME_READONLY),
-    provider.addScope(ClassroomScopes.CLASSROOM_ROSTERS),
-    provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_EMAILS),
-    provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_PHOTOS),
-    provider.addScope(Oauth2Scopes.USERINFO_PROFILE);
+        provider.addScope(ClassroomScopes.CLASSROOM_COURSES),
+        provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS),
+        provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS_READONLY),
+        provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME),
+        provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME_READONLY),
+        provider.addScope(ClassroomScopes.CLASSROOM_ROSTERS),
+        provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_EMAILS),
+        provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_PHOTOS),
+        provider.addScope(Oauth2Scopes.USERINFO_PROFILE);
 
-      const result = await signInWithPopup(this.auth, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const accessToken = credential?.accessToken ?? null;
+      if (Capacitor.isNativePlatform()) {
+        // 📱 Login nativo no Android
+        const googleUser = await GoogleAuth.signIn();
 
-      const user = result.user;
+        // ✅ Pegando o idToken corretamente
+        const idToken = googleUser.authentication?.idToken;
 
-      this.profile.set(user);
-      this.idUser.set(user.providerData[0].uid);
+        if (!idToken) {
+          throw new Error('Erro: idToken não encontrado');
+        }
+
+        const credential = GoogleAuthProvider.credential(idToken);
+        const result = await signInWithCredential(this.auth, credential);
+
+        accessToken = googleUser.authentication?.accessToken ?? null;
+        userData = result.user;
+      } else {
+        // 💻 Login na web
+        const result = await signInWithPopup(this.auth, provider);
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        accessToken = credential?.accessToken ?? null;
+        userData = result.user;
+      }
+      // 📦 Salvar dados no signal e localStorage
+      this.profile.set(userData);
+      this.idUser.set(userData.providerData[0].uid);
       this.token.set(accessToken);
 
-      console.log(result.user.providerData[0]);
-      
+      localStorage.setItem('profile', JSON.stringify(userData));
+      localStorage.setItem('userId', userData.providerData[0].uid);
+      localStorage.setItem('accessToken', accessToken ?? '');
 
-      localStorage.setItem('accessToken', accessToken || '');
-      localStorage.setItem('userId', user.providerData[0].uid);
-      localStorage.setItem('profile', JSON.stringify(user));
       this.router.navigate(['']);
-
-    } catch (err) {
-      console.error('Erro ao fazer login com Google Firebase:', err);
+    } catch (error) {
+      console.error('Erro ao fazer login com Google Firebase:', error);
     }
   }
 
@@ -82,7 +113,7 @@ export class AuthGoogleService {
   }
 
   isTokenValid(): boolean {
-    return true;
+    return this.token() ? true : false;
   }
 
   getAccessToken(): string | null {
