@@ -64,10 +64,10 @@ export class Tab2Page {
   }
 
   redeemBadge() {
-    if (this.badgeCode.length === 8) {
+    if (this.badgeCode.length === 6) {
       this.resgatar(this.badgeCode);
     } else {
-      alert('Código inválido! Certifique-se de que possui 8 dígitos.');
+      alert('Código inválido! Certifique-se de que possui 6 dígitos.');
     }
   }
 
