@@ -1,13 +1,24 @@
 import { Injectable, inject, signal, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Auth, GoogleAuthProvider, signInWithPopup, signOut, signInWithCredential } from '@angular/fire/auth';
+import {
+  Auth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  signInWithCredential
+} from '@angular/fire/auth';
 import { PerfilRequestDto } from 'src/app/models/DTO.model';
-import { isPlatform } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
-import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { Capacitor } from '@capacitor/core';
-import { ClassroomScopes, getAllClassroomScopes } from './classroom-scopes.constants';
-import { getAllOath2Scopes, Oauth2Scopes } from './oauth2-scopes.constants';
+import {
+  ClassroomScopes,
+  getAllClassroomScopes
+} from './classroom-scopes.constants';
+import {
+  getAllOath2Scopes,
+  Oauth2Scopes
+} from './oauth2-scopes.constants';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +38,11 @@ export class AuthGoogleService {
 
     // ⚠️ Só inicializa o plugin em dispositivos nativos
     if (Capacitor.isNativePlatform()) {
-      GoogleAuth.initialize({
-        clientId: 'SEU_WEB_CLIENT_ID_DO_FIREBASE.apps.googleusercontent.com',
-        scopes: getAllClassroomScopes().concat(getAllOath2Scopes())
+      import('@codetrix-studio/capacitor-google-auth').then(({ GoogleAuth }) => {
+        GoogleAuth.initialize({
+          clientId: environment.GOOGLE_CLIENT_ID,
+          scopes: getAllClassroomScopes().concat(getAllOath2Scopes())
+        });
       });
     }
   }
@@ -40,21 +53,21 @@ export class AuthGoogleService {
       let accessToken: string | null = null;
 
       const provider = new GoogleAuthProvider();
-        provider.addScope(ClassroomScopes.CLASSROOM_COURSES),
-        provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS),
-        provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS_READONLY),
-        provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME),
-        provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME_READONLY),
-        provider.addScope(ClassroomScopes.CLASSROOM_ROSTERS),
-        provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_EMAILS),
-        provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_PHOTOS),
-        provider.addScope(Oauth2Scopes.USERINFO_PROFILE);
+      provider.addScope(ClassroomScopes.CLASSROOM_COURSES);
+      provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS);
+      provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS_READONLY);
+      provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME);
+      provider.addScope(ClassroomScopes.CLASSROOM_COURSEWORK_ME_READONLY);
+      provider.addScope(ClassroomScopes.CLASSROOM_ROSTERS);
+      provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_EMAILS);
+      provider.addScope(ClassroomScopes.CLASSROOM_PROFILE_PHOTOS);
+      provider.addScope(Oauth2Scopes.USERINFO_PROFILE);
 
       if (Capacitor.isNativePlatform()) {
         // 📱 Login nativo no Android
-        const googleUser = await GoogleAuth.signIn();
+        const { GoogleAuth } = await import('@codetrix-studio/capacitor-google-auth');
 
-        // ✅ Pegando o idToken corretamente
+        const googleUser = await GoogleAuth.signIn();
         const idToken = googleUser.authentication?.idToken;
 
         if (!idToken) {
@@ -67,12 +80,13 @@ export class AuthGoogleService {
         accessToken = googleUser.authentication?.accessToken ?? null;
         userData = result.user;
       } else {
-        // 💻 Login na web
+        // 💻 Login na Web
         const result = await signInWithPopup(this.auth, provider);
         const credential = GoogleAuthProvider.credentialFromResult(result);
         accessToken = credential?.accessToken ?? null;
         userData = result.user;
       }
+
       // 📦 Salvar dados no signal e localStorage
       this.profile.set(userData);
       this.idUser.set(userData.providerData[0].uid);
