@@ -36,6 +36,7 @@
     "@ionic/pwa-elements": "^3.3.0",
     "@zxing/library": "^0.21.3",
     "angular-oauth2-oidc": "^17.0.2",
+    "cordova-plugin-googleplus": "^8.5.2",
     "dotenv": "^16.6.1",
     "firebase": "^11.10.0",
     "ionicons": "^7.0.0",
@@ -44,6 +45,9 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
+  },
+    "optionalDependencies": {
+    "@codetrix-studio/capacitor-google-auth": "^3.4.0-rc.4"
   },
   "devDependencies": {
     "@angular-eslint/builder": "^19.0.0",
