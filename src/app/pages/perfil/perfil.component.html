@@ -22,7 +22,7 @@
     <h3>Conquistas</h3>
     <div class="badges-container" *ngIf="perfil().badges && perfil().badges.length > 0">
       <div *ngFor="let badge of perfil().badges" class="badge" [title]="badge">
-      <img ngOptimizedImage [ngSrc]="badge.imagem" alt="{{ badge.nome }}" width="50" height="50" style="border-radius: 20px;">
+      <img ngOptimizedImage [ngSrc]="badge.imagem" alt="{{ badge.nome }}" width="50" height="50" style="border-radius: 20rem;">
         <span class="badge-tooltip">{{ badge.nome }}</span>
       </div>
     </div>
