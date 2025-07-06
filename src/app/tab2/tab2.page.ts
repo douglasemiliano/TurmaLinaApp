@@ -56,7 +56,7 @@ export class Tab2Page {
   resgatar(codigo: string){
     this.cursoService.resgatarBadge(codigo).subscribe({
       next:(response: any) =>{
-        alert(response.nome)
+        alert("Você resgatou uma recompensa: " + response.nome)
       }, error: (error: any) => {
         alert(error.error.text)
       }
@@ -65,7 +65,7 @@ export class Tab2Page {
 
   redeemBadge() {
     if (this.otp.value.length === 6) {
-      this.resgatar(this.badgeCode);
+      this.resgatar(this.otp.value);
     } else {
       alert('Código inválido! Certifique-se de que possui 6 dígitos.');
     }
