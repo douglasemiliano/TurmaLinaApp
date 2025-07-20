@@ -18,15 +18,28 @@ export class ListarCursoComponent implements OnInit {
 
   cursos: any[];
 
-    ngOnInit(): void {      
-      this.cursoService.getCursos().subscribe({
+    ngOnInit(): void {    
+
+      this.cursoService.getListaCursos().subscribe({
         next: (cursos: any) => {
           this.cursos = cursos;
+          console.log('Cursos carregados:', this.cursos);
         },
         error: (error) => {
           console.error('Erro ao carregar os cursos:', error);
         }
-      })
+      });
+
+      this.cursoService.listarCursos();
+        
+      // this.cursoService.getCursos().subscribe({
+      //   next: (cursos: any) => {
+      //     this.cursos = cursos;
+      //   },
+      //   error: (error) => {
+      //     console.error('Erro ao carregar os cursos:', error);
+      //   }
+      // })
       this.coreService.atualizarRotaAtual(location.pathname);
     }
 

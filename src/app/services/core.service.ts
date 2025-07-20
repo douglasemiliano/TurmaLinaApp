@@ -6,6 +6,7 @@ import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
 export class CoreService {
 
   rotaAtual: WritableSignal<string> = signal("/");
+  modoVisualizacao: WritableSignal<string> = signal(''); // Default value, can be 'ALUNO' or 'PROFESSOR'
 
   constructor() { }
 
@@ -15,5 +16,10 @@ export class CoreService {
 
   getRotaAtual(): Signal<string>{
     return this.rotaAtual;
+  }
+
+  atualizarModoVizualicao(modo: string) {
+    window.localStorage.setItem('modoVisualizacao', modo);
+    this.modoVisualizacao.set(modo);
   }
 }

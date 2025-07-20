@@ -6,11 +6,13 @@ import {
   IonItem,
   IonList,
   IonListHeader,
-  IonToggle, IonButton, IonHeader, IonToolbar, IonTitle, IonButtons } from '@ionic/angular/standalone';
+  IonToggle, IonButton, IonHeader, IonToolbar, IonTitle, IonButtons, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
 import { AuthGoogleService } from 'src/app/services/auth/auth-google.service';
 import { ModalController } from '@ionic/angular';
+import { CursoService } from 'src/app/services/curso.service';
+import { CoreService } from 'src/app/services/core.service';
 
 @Component({
   selector: 'app-settings',
@@ -27,15 +29,19 @@ import { ModalController } from '@ionic/angular';
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonButtons
+    IonButtons,IonSelect, IonSelectOption
   ],
   providers:[ModalController]
 })
 export class SettingsComponent implements OnInit {
   paletteToggle = false;
-
+  
   authService = inject(AuthGoogleService);
   modalController = inject(ModalController);
+  
+  cursoService = inject(CursoService);
+  coreService = inject(CoreService);
+  modoVisualizacao = this.coreService.modoVisualizacao(); // Default value, can be 'aluno' or 'professor'
 
   constructor() {
     addIcons({ personCircle, personCircleOutline, sunny, sunnyOutline });
@@ -52,6 +58,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     // Recuperar o valor do modo de tema do localStorage
+    const storedModo = localStorage.getItem('modoVisualizacao');
     const storedTheme = localStorage.getItem('theme');
 
     // Verificar se o valor existe no localStorage, caso contrário, verificar a preferência do sistema
@@ -90,5 +97,13 @@ export class SettingsComponent implements OnInit {
   // Adicionar ou remover a classe "ion-palette-dark" no elemento HTML
   toggleDarkPalette(shouldAdd: boolean) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+  }
+
+  modoVisualizacaoChange(event: CustomEvent) {
+    this.modoVisualizacao = event.detail.value;
+    // Salvar o modo de visualização no localStorage
+    this.coreService.atualizarModoVizualicao(this.modoVisualizacao);
+    console.log('Modo de visualização alterado para:', this.modoVisualizacao);
+    this.cursoService.listarCursos();
   }
 }

@@ -3,7 +3,7 @@ import { CallbackComponent } from './pages/auth/callback/callback.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', loadComponent: () => import('./pages/loading/loading.component').then(m => m.LoadingComponent) },
+  { path: '', loadComponent: () => import('./pages/loading/loading.component').then(m => m.LoadingComponent), canActivate: [authGuard] }, 
   { path: 'callback', component: CallbackComponent },
   { path: 'login', loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent) },
   { path: 'cursos', loadComponent: () => import('./pages/curso/listar-curso/listar-curso.component').then(m => m.ListarCursoComponent), canActivate: [authGuard] },

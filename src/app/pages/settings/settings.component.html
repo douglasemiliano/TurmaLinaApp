@@ -7,8 +7,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list-header>Modo de Cor</ion-list-header>
+  <ion-list-header>Configurações</ion-list-header>
   <ion-list [inset]="true">
+    <ion-item>
+      <ion-select  [(ngModel)]="modoVisualizacao" (ionChange)="modoVisualizacaoChange($event)" label="Modo de Visualização" placeholder="Selecionar modo de visualização">
+        <ion-select-option value="ALUNO">Aluno</ion-select-option>
+        <ion-select-option value="PROFESSOR">Professor</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-item>
       <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between">
         Modo de Cor</ion-toggle>

@@ -19,6 +19,8 @@ import {
   Oauth2Scopes
 } from './oauth2-scopes.constants';
 import { environment } from 'src/environments/environment';
+import { AlertController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +35,7 @@ export class AuthGoogleService {
   private token = signal<string | null>(null);
   private perfilRequestDto: WritableSignal<PerfilRequestDto> = signal(new PerfilRequestDto());
 
-  constructor() {
+  constructor(private alertCtrl: AlertController) {
     this.loadFromStorage();
 
     // ⚠️ Só inicializa o plugin em dispositivos nativos
@@ -70,12 +72,18 @@ export class AuthGoogleService {
         const googleUser = await GoogleAuth.signIn();
         const idToken = googleUser.authentication?.idToken;
 
+        this.showDebug(googleUser)
+        this.showDebug(idToken)
+
         if (!idToken) {
           throw new Error('Erro: idToken não encontrado');
         }
 
         const credential = GoogleAuthProvider.credential(idToken);
         const result = await signInWithCredential(this.auth, credential);
+
+        this.showDebug(credential)
+        this.showDebug(result)
 
         accessToken = googleUser.authentication?.accessToken ?? null;
         userData = result.user;
@@ -149,4 +157,14 @@ export class AuthGoogleService {
     this.perfilRequestDto().alunoId = this.idUser()!;
     return this.perfilRequestDto();
   }
+
+  async showDebug(data: any) {
+  const alert = await this.alertCtrl.create({
+    header: 'Debug Info',
+    message: JSON.stringify(data),
+    buttons: ['OK']
+  });
+
+  await alert.present();
+}
 }

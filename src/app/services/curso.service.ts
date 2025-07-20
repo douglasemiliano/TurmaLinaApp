@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthGoogleService } from './auth/auth-google.service';
+import { Subject } from 'rxjs';
+import { CoreService } from './core.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class CursoService {
   cursoAtual: WritableSignal<any> = signal(null);
   http = inject(HttpClient);
   private authService = inject(AuthGoogleService); // Assuming you have an AuthGoogleService for authentication
-
+  private coreService = inject(CoreService); // Assuming you have a CoreService for core functionalities
   atividadeAtual: WritableSignal<any> = signal(null);
 
   private baseUrl = environment.BACKEND_URL;
@@ -19,10 +21,37 @@ export class CursoService {
 
   idUser = window.localStorage.getItem("userId") || '';
 
-  constructor() { }
+  listaCursos: Subject<any> = new Subject<any>();
+
+  constructor() {
+    this.coreService.atualizarModoVizualicao(window.localStorage.getItem('modoVisualizacao') || 'ALUNO');
+   }
+
+
+  getListaCursos(){
+    return this.listaCursos.asObservable();
+  }
+
+  listarCursos(){
+    this.getCursos().subscribe({
+      next: (cursos: any) => {
+        this.listaCursos.next(cursos);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar os cursos:', error);
+      }
+    });
+  }
 
   getCursos() {
-    return this.http.get(`${this.baseUrl}/cursos/${this.idUser}`);
+
+    const modoVisualizacao = this.coreService.modoVisualizacao();
+    console.log('Modo de visualização:', modoVisualizacao);
+    
+    if(modoVisualizacao === 'ALUNO'){
+      return this.http.get(`${this.baseUrl}/cursos/${this.idUser}`);
+    }
+      return this.http.get(`${this.baseUrl}/cursos/${this.idUser}/me`);
   }
 
   getAtividades(cursoId: string) {
