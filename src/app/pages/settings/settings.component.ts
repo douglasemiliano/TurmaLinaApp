@@ -105,5 +105,7 @@ export class SettingsComponent implements OnInit {
     this.coreService.atualizarModoVizualicao(this.modoVisualizacao);
     console.log('Modo de visualização alterado para:', this.modoVisualizacao);
     this.cursoService.listarCursos();
+    this.coreService.atualizarModo(this.modoVisualizacao);
+    this.modalController.dismiss();
   }
 }

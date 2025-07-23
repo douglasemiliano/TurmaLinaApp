@@ -1,15 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Receber Badges</ion-title>
+    <ion-title>Recompensas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Input para código do badge -->
+
+  @if(this.modoVisualizacao === "ALUNO"){
   <div class="badge-input-container">
     <h2 style="text-align: center;">Resgate sua recompensa!</h2>
     <p style="text-align: center;">Digite o código para resgatar sua recompensa</p>
-    <div style="width: 100%; display: flex; justify-content: center; align-items: center; height: 50px; width: 100%; margin-bottom: 10px; margin-top: 1rem;">
+    <div
+      style="width: 100%; display: flex; justify-content: center; align-items: center; height: 50px; width: 100%; margin-bottom: 10px; margin-top: 1rem;">
       <ng-otp-input class="otp-input" [formControl]="otp" [config]="config"></ng-otp-input>
     </div>
     <ion-button expand="block" color="primary" (click)="redeemBadge()">
@@ -25,7 +27,60 @@
       Ler QR Code
     </ion-button>
   </div>
+  } @else {
+    <h3 style="text-align: center;">Criar Recompensa</h3>
+    <ion-list-header>
+    </ion-list-header>
+    <ion-list>
+      <ion-item>
+        <ion-select label="Badge" placeholder="Selecione uma Badge" [(ngModel)]="badgeSelecionada" (ionChange)="badgeChange($event)">
+          @for (badge of badges; track badge.id) {
+            <ion-select-option [value]="badge">{{badge.nome}}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
-  <!-- Exibição de fotos capturadas -->
+    <ion-button expand="block" (click)="gerarCodigo()" [disabled]="!badgeSelecionada" class="ion-margin-top">
+      <ion-icon name="keypad-outline" slot="start"></ion-icon>
+      Gerar Código
+    </ion-button>
 
+    @if (badgeCode) {
+      <ion-card class="ion-text-center ion-margin-top">
+        <ion-card-header>
+          <ion-card-title>Código de Resgate</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="codigo-container">
+            <h1><strong>{{ badgeCode }}</strong></h1>
+            <ion-button fill="clear" size="large" [cdkCopyToClipboard]="textoParaCopiar" (cdkCopyToClipboardCopied)="onCodigoCopiado()">
+              <ion-icon slot="icon-only" name="copy-outline" aria-label="Copiar código"></ion-icon>
+            </ion-button>
+          </div>
+          <p>Apresente o código ou o QR Code abaixo para o aluno.</p>
+
+<div class="qrcodeImage">
+  <qrcode
+    [qrdata]="badgeCode"
+    [allowEmptyString]="true"
+    [ariaLabel]="'QR Code image with the following content...'"
+    [cssClass]="'center'"
+    [colorDark]="'#000000ff'"
+    [colorLight]="'#ffffffff'"
+    [elementType]="'canvas'"
+    [errorCorrectionLevel]="'M'"
+    [imageSrc]="'./assets/angular-logo.png'"
+    [imageHeight]="75"
+    [imageWidth]="75"
+    [margin]="4"
+    [scale]="1"
+    [title]="'A custom title attribute'"
+    [width]="250"
+  ></qrcode>
+</div>
+        </ion-card-content>
+      </ion-card>
+    }
+  }
 </ion-content>

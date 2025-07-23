@@ -83,6 +83,10 @@ export class CursoService {
     return this.http.post(`${this.baseUrl}/badge/resgatar?code=${codigo}&userId=${this.idUser}`, {});
   }
 
+  getBadgesByUser(idUser: string) {
+    return this.http.get(`${this.baseUrl}/badge/user/${idUser}`);
+  }
+
   setCursoAtual(curso: any) {
     this.cursoAtual.set(curso);
   }
