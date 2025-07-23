@@ -1,6 +1,6 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from "@ionic/angular/standalone";
-import { IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonButtons } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonHeader, IonToolbar, IonTitle, IonButtons, ToastController } from '@ionic/angular/standalone';
 import { CursoService } from 'src/app/services/curso.service';
 import { PhotoService } from 'src/app/services/photo.service';
 
@@ -23,6 +23,7 @@ export class QrCodeComponent  implements OnInit {
   modalCtrl = inject(ModalController);
   photoService = inject(PhotoService);
   cursoService = inject(CursoService);
+  private toastCtrl = inject(ToastController);
 
   ngOnInit() {
   }
@@ -58,14 +59,27 @@ export class QrCodeComponent  implements OnInit {
     }
   }
 
-  resgatar(codigo: string){
+ async resgatar(codigo: string) {
     this.cursoService.resgatarBadge(codigo).subscribe({
-      next:(response: any) =>{
-        alert(response.nome)
-      }, error: (error: any) => {
-        alert(error.error.text)
+      next: async (response: any) => {
+        const toast = await this.toastCtrl.create({
+          message: `Você resgatou a recompensa: ${response.nome}!`,
+          duration: 3000,
+          color: 'success',
+          icon: 'trophy-outline'
+        });
+        await toast.present();
+      }, error: async (error: any) => {
+        const toast = await this.toastCtrl.create({
+          message: error.error.text,
+          duration: 3000,
+          color: 'danger',
+          icon: 'alert-circle-outline'
+        });
+        await toast.present();
       }
     })
   }
+
 
 }
