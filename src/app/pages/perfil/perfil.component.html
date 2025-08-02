@@ -14,8 +14,8 @@
     <h2>{{ perfil().nome }}</h2>
     <p>{{ perfil().email }}</p>
   </div>
-
-  <app-progress-bar [level]="perfil().nivel" [progress]="10"></app-progress-bar>
+  
+  <app-progress-bar [level]="perfil().nivel" [progress]="setarProgresso(perfil().pontuacaoGlobal)"></app-progress-bar>
 
 
   <div class="conquistas-container">

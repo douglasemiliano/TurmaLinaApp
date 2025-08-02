@@ -92,17 +92,6 @@ export class ListarAtividadeComponent implements OnInit {
       next: (atividades: any) => {
         this.atividades = atividades;
       }});
-
-      this.cursoService.getRankingByCurso(this.cursoAtual.id).subscribe({
-        next: (ranking: any) => {
-
-          console.log(ranking);
-  
-        },
-        error: (error) => {
-          console.error('Erro ao carregar o ranking:', error);
-        }
-      })
   }
   
   getPositionClass(index: number): string {

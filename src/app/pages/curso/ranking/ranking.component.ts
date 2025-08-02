@@ -2,12 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CursoService } from 'src/app/services/curso.service';
 import { IonLabel, IonAvatar, IonContent, IonItem, IonList, IonBadge } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-ranking',
   templateUrl: './ranking.component.html',
   styleUrls: ['./ranking.component.scss'],
-  imports: [IonLabel, IonAvatar, IonItem, IonList, IonBadge]
+  imports: [IonLabel, IonAvatar, IonItem, IonList, IonBadge, NgOptimizedImage]
 })
 export class RankingComponent  implements OnInit {
 

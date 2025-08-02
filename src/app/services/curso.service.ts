@@ -51,7 +51,7 @@ export class CursoService {
     if(modoVisualizacao === 'ALUNO'){
       return this.http.get(`${this.baseUrl}/cursos/${this.idUser}`);
     }
-      return this.http.get(`${this.baseUrl}/cursos/${this.idUser}/me`);
+      return this.http.get(`${this.baseUrl}/cursos/${this.idUser}/meus-cursos`);
   }
 
   getAtividades(cursoId: string) {

@@ -56,4 +56,12 @@ export class PerfilComponent {
       window.localStorage.setItem('perfil', JSON.stringify(this.perfil()));
     }
   }
+
+  setarProgresso(pontuacao: number) {
+    let progresso = pontuacao * 10;
+    if (progresso <= 100) {
+      return progresso
+    }
+     return progresso % 100;
+  }
 }

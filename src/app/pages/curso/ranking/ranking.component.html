@@ -5,8 +5,8 @@
      <div class="player second-place">
        <div class="medal">2</div>
        <ion-avatar>
-         <img src="assets/dog.png" />
-       </ion-avatar>
+         <img ngOptimizedImage [ngSrc]="ranking[1].foto" alt="Foto de {{ ranking[1].nomeAluno }}" width="100" height="100" priority
+         class="foto-perfil" (error)="ranking[1].foto = 'assets/default-avatar.png'">       </ion-avatar>
        <ion-label>
          <h2>{{ ranking[1].nomeAluno }}</h2>
          <h3>{{ ranking[1].pontuacaoTotal }} pts</h3>
@@ -19,8 +19,8 @@
      <div class="player first-place">
        <div class="medal">1</div>
        <ion-avatar>
-         <img src="assets/zebra.png" />
-       </ion-avatar>
+         <img ngOptimizedImage [ngSrc]="ranking[0].foto" alt="Foto de {{ ranking[0].nomeAluno }}" width="100" height="100" priority
+         class="foto-perfil" (error)="ranking[0].foto = 'assets/default-avatar.png'">       </ion-avatar>
        <ion-label>
          <h2>{{ ranking[0].nomeAluno }}</h2>
          <h3>{{ ranking[0].pontuacaoTotal }} pts</h3>
@@ -34,7 +34,8 @@
      <div class="player third-place">
        <div class="medal">3</div>
        <ion-avatar>
-         <img src="assets/wolf.png" />
+         <img ngOptimizedImage [ngSrc]="ranking[2].foto" alt="Foto de {{ ranking[2].nomeAluno }}" width="100" height="100" priority
+         class="foto-perfil" (error)="ranking[2].foto = 'assets/default-avatar.png'">
        </ion-avatar>
        <ion-label>
          <h2>{{ ranking[2].nomeAluno }}</h2>
