@@ -87,6 +87,22 @@ export class CursoService {
     return this.http.get(`${this.baseUrl}/badge/user/${idUser}`);
   }
 
+  getAllBadges(){
+    return this.http.get(`${this.baseUrl}/badge`);
+  }
+
+  getDesafiosByCurso(idCurso: string) {
+    return this.http.get(`${this.baseUrl}/desafio/${idCurso}`);
+  }
+
+  getDesafiosAluno(idCurso: string, idAluno: string) {
+    return this.http.get(`${this.baseUrl}/desafio/${idCurso}/${idAluno}`);
+  }
+
+  resgatarDesafio(resgate: any) {
+    return this.http.post(`${this.baseUrl}/desafio/resgatar`, resgate); 
+ }
+
   setCursoAtual(curso: any) {
     this.cursoAtual.set(curso);
   }

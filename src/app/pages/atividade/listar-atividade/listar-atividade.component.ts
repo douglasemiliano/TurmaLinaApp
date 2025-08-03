@@ -15,6 +15,7 @@ import {
 import { CursoService } from 'src/app/services/curso.service';
 import { TrilhaComponent } from '../trilha/trilha.component';
 import { RankingComponent } from '../../curso/ranking/ranking.component';
+import { DesafiosAlunoComponent } from '../../desafios/desafios-aluno/desafios-aluno.component';
 
 @Component({
   selector: 'app-listar-atividade',
@@ -32,7 +33,8 @@ import { RankingComponent } from '../../curso/ranking/ranking.component';
     IonSegmentView,
     TrilhaComponent,
     RankingComponent,
-    IonContent]
+    IonContent,
+    DesafiosAlunoComponent]
 })
 export class ListarAtividadeComponent implements OnInit {
   

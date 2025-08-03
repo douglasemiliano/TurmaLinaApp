@@ -1,0 +1,38 @@
+<ion-content>
+
+  <h3>Desafios</h3>
+  
+  @for(desafio of desafiosCurso; track desafio.id) {
+
+  <div class="card">
+    
+    <div class="content">
+      <h4>{{desafio.titulo}}</h4>
+      <h5>{{desafio.descricao}}</h5>
+      <h5> <strong>Status:</strong> {{ desafiosAluno.length > 0 ? desafiosAluno[$index].status : 'Pendente' }}</h5>
+      <h5>Premiação:</h5>
+
+      <div class="premio">
+        @for(premio of desafio.premio; track premio) {
+        <ion-badge slot="end">{{ premio.pontuacao }} Pontos</ion-badge>
+        @if(badges.length > 0 && premio.badgeId) {
+        <img ngOptimizedImage [ngSrc]="selecionarBadge(premio.badgeId).imagem"
+          alt="{{ selecionarBadge(premio.badgeId).nome }}" width="50" height="50" style="border-radius: 20rem;">
+        }
+      }
+
+      @if(desafiosAluno.length > 0 && desafiosAluno[$index].status === "COMPLETO"){
+        <div class="resgatar">
+          <ion-button (click)="resgatarDesafio(desafio.id)">Resgatar</ion-button>
+        </div>
+        }
+      </div>
+
+    </div>
+
+
+  </div>
+
+  }
+  
+</ion-content>

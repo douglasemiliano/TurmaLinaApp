@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 export class CoreService {
 
   rotaAtual: WritableSignal<string> = signal("/");
-  modoVisualizacao: WritableSignal<string> = signal('ALUNO'); // Default value, can be 'ALUNO' or 'PROFESSOR'
+  modoVisualizacao: WritableSignal<string> = signal(''); // Default value, can be 'ALUNO' or 'PROFESSOR'
   
   modoSource: Subject<string> = new Subject<string>();
   modo = this.modoSource.asObservable();
