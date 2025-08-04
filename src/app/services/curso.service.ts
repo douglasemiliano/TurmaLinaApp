@@ -99,6 +99,10 @@ export class CursoService {
     return this.http.get(`${this.baseUrl}/desafio/${idCurso}/${idAluno}`);
   }
 
+  criarDesafio(desafio: any) {
+    return this.http.post(`${this.baseUrl}/desafio`, desafio);
+  }
+
   resgatarDesafio(resgate: any) {
     return this.http.post(`${this.baseUrl}/desafio/resgatar`, resgate); 
  }

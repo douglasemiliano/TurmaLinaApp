@@ -1,6 +1,11 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
-import { IonAvatar } from '@ionic/angular/standalone';
+import { IonAvatar, RefresherCustomEvent, IonContent,
+  IonHeader,
+  IonRefresher,
+  IonRefresherContent,
+  IonTitle,
+  IonToolbar, } from '@ionic/angular/standalone';
 import { ProgressBarComponent } from '../../components/progress-bar/progress-bar.component';
 import { CursoService } from 'src/app/services/curso.service';
 
@@ -8,7 +13,7 @@ import { CursoService } from 'src/app/services/curso.service';
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss'],
-  imports: [NgOptimizedImage, CommonModule, IonAvatar, ProgressBarComponent]
+  imports: [NgOptimizedImage, CommonModule, IonAvatar, ProgressBarComponent, IonContent, IonRefresher, IonRefresherContent]
 })
 export class PerfilComponent {
   isOpen = false;
@@ -63,5 +68,24 @@ export class PerfilComponent {
       return progresso
     }
      return progresso % 100;
+  }
+
+  recarregarPerfil(){
+    if (this.userId) {
+      this.cursoService.getPerfilAluno(this.userId).subscribe({
+        next: (perfil: any) => {
+          console.log(perfil);
+          this.perfil.set(perfil);
+        }
+      })
+    }
+  }
+
+    handleRefresh(event: RefresherCustomEvent) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      this.recarregarPerfil();
+      event.target.complete();
+    }, 2000);
   }
 }

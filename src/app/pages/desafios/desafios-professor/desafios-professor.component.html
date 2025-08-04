@@ -1,0 +1,98 @@
+  <ion-content>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <ion-list>
+  
+        <ion-item>
+          <ion-label position="stacked">Curso ID</ion-label>
+          <ion-input formControlName="cursoId"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked">Criado por</ion-label>
+          <ion-input formControlName="createdBy"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked">Título</ion-label>
+          <ion-input formControlName="titulo"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked">Descrição</ion-label>
+          <ion-textarea formControlName="descricao"></ion-textarea>
+        </ion-item>
+  
+      <ion-item>
+        <ion-label position="stacked">Data Final</ion-label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      </ion-item>
+  
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime id="datetime" 
+            (ionChange)="form.get('dataFinal')?.setValue($event.detail.value)"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+  
+        
+  
+        
+  
+        <!-- Prêmios -->
+        <ion-item-divider>
+          <ion-label>Prêmios</ion-label>
+        </ion-item-divider>
+  
+        <div formArrayName="premio">
+          <div *ngFor="let item of premio.controls; let i = index" [formGroupName]="i">
+            <ion-item>
+              <ion-label position="stacked">Pontuação</ion-label>
+              <ion-input type="number" formControlName="pontuacao"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-select label="Badge" placeholder="Badge" formControlName="badgeId" >
+                @for(badge of badges; track badge) {
+                  <ion-select-option [value]="badge.id">{{ badge.nome }}</ion-select-option>
+                }
+              </ion-select>
+            </ion-item>
+          </div>
+          <ion-button expand="block" fill="outline" (click)="addPremio()">+ Adicionar Prêmio</ion-button>
+        </div>
+  
+        <!-- Condições de Vitória -->
+        <ion-item-divider>
+          <ion-label>Condições de Vitória</ion-label>
+        </ion-item-divider>
+  
+        <div formArrayName="winCondition">
+          <div *ngFor="let cond of winCondition.controls; let i = index" [formGroupName]="i">
+            <ion-item>
+                  <ion-select label="Tipo da Condição" placeholder="Condição">
+                    @for(tipo of tiposWincondition; track tipo) {
+                      <ion-select-option [value]="tipo">{{ tipo }}</ion-select-option>
+                    }
+                  </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Quantidade</ion-label>
+              <ion-input type="number" formControlName="quantidade"></ion-input>
+            </ion-item>
+  
+            <div formArrayName="estado">
+              <div *ngFor="let est of getEstadoControls(cond).controls; let j = index">
+                <ion-item>
+                  <ion-label position="stacked">Estado {{ j + 1 }}</ion-label>
+                  <ion-input [formControlName]="j"></ion-input>
+                </ion-item>
+              </div>
+            </div>
+          </div>
+          <ion-button expand="block" fill="outline" (click)="addWinCondition()">+ Adicionar Condição</ion-button>
+        </div>
+  
+        <ion-button expand="block" type="submit" color="primary">Salvar</ion-button>
+      </ion-list>
+    </form>
+  </ion-content>
+

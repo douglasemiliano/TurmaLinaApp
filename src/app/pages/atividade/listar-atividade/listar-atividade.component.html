@@ -31,7 +31,12 @@
   
   <ion-segment-content id="second">
     <ion-content>
-      <app-desafios-aluno></app-desafios-aluno>
+      @if(modoVisualizacao === "" || modoVisualizacao === "ALUNO"){
+        <app-desafios-aluno></app-desafios-aluno>
+      }
+      @else {
+        <app-desafios-professor></app-desafios-professor>
+      }
     </ion-content>
   </ion-segment-content>
   

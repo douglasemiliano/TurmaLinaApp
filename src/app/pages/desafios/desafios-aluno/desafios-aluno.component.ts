@@ -1,6 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { IonCard, IonItem, IonLabel, IonBadge, IonCardContent, IonCardHeader, IonContent, IonToolbar, IonTitle, IonCardSubtitle, IonCardTitle, IonList, IonButton, IonHeader } from '@ionic/angular/standalone';
+import { IonBadge, 
+  IonContent, IonButton,
+  IonRefresher,
+  IonRefresherContent, } from '@ionic/angular/standalone';
+import { RefresherCustomEvent } from '@ionic/core';
 import { CursoService } from 'src/app/services/curso.service';
 
 
@@ -8,7 +12,8 @@ import { CursoService } from 'src/app/services/curso.service';
   selector: 'app-desafios-aluno',
   templateUrl: './desafios-aluno.component.html',
   styleUrls: ['./desafios-aluno.component.scss'],
-  imports: [IonHeader, IonToolbar, IonContent, IonTitle, NgOptimizedImage, IonButton, IonList, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonItem, IonLabel, IonBadge,],
+  imports: [IonRefresher,
+  IonRefresherContent, IonContent, NgOptimizedImage, IonButton, IonBadge,],
 })
 export class DesafiosAlunoComponent  implements OnInit {
 
@@ -71,4 +76,12 @@ export class DesafiosAlunoComponent  implements OnInit {
     })
   }
   
+      handleRefresh(event: RefresherCustomEvent) {
+      setTimeout(() => {
+        // Any calls to load data go here
+        this.ngOnInit();
+        event.target.complete();
+      }, 2000);
+    }
+
 }
